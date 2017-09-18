@@ -1,0 +1,125 @@
+All Actions
+	-0.1 hunger
+	-0.5 stamina
+	-0.5 thirst
+Collect Stones
+	1-3 stones
+	1:10 chance to find 5 turn pond and 10 water
+Collect Branches
+	1-3 branches
+	1:10 chance to find 5 fungus
+Collect Leaves
+	1-3 leaves
+	1:15 chance to find 3 turn berry bush and 15 berries
+Collect Wheat Seeds
+	1-3 wheat seeds
+	1:20 chance to find 5 worms
+Mine Rock (Requires pickaxe)
+	Tier rewards compound
+	Basic
+		1-3 rocks
+		2-5 stones
+		1:10 chance to find 3 coal
+		1:15 chance to find 3 tin
+	Tin
+		1-3 rocks
+		2-5 stones
+		1:5 chance to find 3 coal
+		1:10 chance to find 3 tin
+		1:15 chance to find 3 aluminium
+	Aluminium
+		1-3 rocks
+		2-5 stones
+		1-3 coal
+		1:5 chance to find 3 tin
+		1:10 chance to find 3 aluminium
+		1:15 chance to find 3 copper
+	Copper
+		1-3 rocks
+		2-5 stones
+		1-3 coal
+		1-3 tin
+		1:5 chance to find 3 aluminium
+		1:10 chance to find 3 copper
+		1:15 chance to find 3 iron
+	Iron
+		1-3 rocks
+		2-5 stones
+		1-3 coal
+		1-3 tin
+		1-3 aluminium
+		1:5 chance to find 3 copper
+		1:10 chance to find 3 iron
+	Steel
+		
+	Hardened Steel
+		
+	Diamond
+		
+Cut Logs (Requires axe)
+	Basic
+		1-3 logs
+		2-5 branches
+	Tin
+		etc...
+	Aluminium
+	Copper
+	Iron
+	Steel
+	Hardened Steel
+	Diamond
+
+Rest
+	1:2 chance for -0.1 hunger
+	1:2 chance for -0.1 thirst
+	1 stamina
+Drink
+	0.5 stamina
+	# thirst
+Eat
+	0.5 stamina
+	# hunger
+
+Items
+	Stones
+	Branches
+	Leaves
+	Wheat Seeds
+	Water
+		1 thirst
+	Berries
+		0.5 hunger
+	Mushrooms
+		0.5 hunger
+		-0.5 health
+
+Planned
+	Smelting ores
+		Converts ore into ingots by reaching the proper temperature
+	Alloying metals
+		Combine multiple ingots by melting them together
+	Irrigation
+		Allows the collection of dirt and clay and the planting of farms
+	Farming
+		Allows a steady food source to be grown while other tasks are done
+		Affected by the time and season
+	More crops
+		Allows different food to be grown, and eventually mixed in cooking
+	Equipment and machinery
+		Some automatically collect/produce a material
+		Some speed up the collection/production process
+		Rain collector
+			Can randomly collect a small amount of water
+		Furnace
+			Takes fuel to melt ores and ingots
+			Bakes bricks from adobe or clay
+		Saw
+			Allows wood to be refined
+		Tools
+			Various types and tiers allow different materials to be collected
+		Metal workshop
+			Allows many custom metal components to be made
+		Tractor
+			Harvests all crops with the click of one button
+		Computerized tractor
+			Automatically harvests all crops when ready

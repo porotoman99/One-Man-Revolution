@@ -12,7 +12,7 @@
 		border-style: solid;
 		border-width: 1px;
 	}
-	h3
+	h2, h3, h5
 	{
 		margin-top: 1;
 		margin-bottom: 1;
@@ -21,41 +21,88 @@
 	{
 		padding-left: 25px;
 	}
+	.indent-right
+	{
+		padding-right: 25px;
+	}
+	.full-width
+	{
+		width: 100%;
+	}
 </style>
 <html>
 	<head>
 		<title>
-			<!--Game-->
+			One-Man Revolution
 		</title>
 	</head>
 	<body>
+		<!-- Title and description of game -->
+		<table class="full-width" style="padding: 0;"><tr><td>
+		<div style="margin: 0 auto; text-align: center;">
+			<h2>
+				One-Man Revolution
+			</h2>
+			<h5>
+				A permadeath turn-based incremental
+			</h5>
+		</div>
+		</td></tr></table>
+		<table class="full-width"><tr><td style="width: 20%; vertical-align: top;">
 		<!-- Left Panel (Currently Used For Inventory) -->
-		<div style="display:inline-block; width: 20%; border-style: none; margin: 0; padding: 0;">
+		<div style="display:inline-block; border-style: none; margin: 0; padding: 0;" class="full-width">
 			<div class="inventoryList" style="margin: 0;">
 				<h3>
-					Inventory:
+					Items:
 				</h3>
 				<details open>
 					<summary><b>Raw Materials:</b></summary>
 					<span class="stoneCount indent">Stones: <span class="stoneBank">0</span></span>
 					<br>
-					<span class="branchCount indent">Branches: <span class="branchBank">0</span></span>
-					<br>
 					<span class="leafCount indent">Leaves: <span class="leafBank">0</span></span>
+					<br>
+					<span class="branchCount indent">Branches: <span class="branchBank">0</span></span>
 					<br>
 					<span class="wheatSeedCount indent">Wheat Seeds: <span class="wheatSeedBank">0</span></span>
 				</details>
 				<details open>
-					<summary><b>Consumables</b></summary>
+					<summary><b>Consumables:</b></summary>
 					<span class="waterCount indent">Water: <span class="waterBank">0</span></span>
+					<br>
+					<span class="berryCount indent">Berries: <span class="berryBank">0</span></span>
+					<br>
+					<span class="fungusCount indent">Fungus: <span class="fungusBank">0</span></span>
+				</details>
+				<details open>
+					<summary><b>Refined Materials:</b></summary>
+					<span class="sharpStoneCount indent">Sharpened Stones: <span class="sharpStoneBank">0</span></span>
+					<br>
+					<span class="leafTarpCount indent">Leaf Tarps: <span class="leafTarpBank">0</span></span>
+					<br>
+					<span class="smoothBranchCount indent">Smooth Branches: <span class="smoothBranchBank">0</span></span>
+					<br>
+					<span class="ropeCount indent">Rope: <span class="ropeBank">0</span></span>
+				</details>
+			</div>
+			<div class="toolList" style="margin: 5 0 0 0; display: none;">
+				<details open>
+					<summary>
+						<b>Tools:</b>
+					</summary>
+					<span class="pickaxeDisp indent" style="display: none;">Pickaxe: <span class="pickaxeTier">Basic (1)</span><br></span>
+					<span class="axeDisp indent" style="display: none;">Axe: <span class="axeTier">Basic (1)</span><br></span>
+					<span class="shovelDisp indent" style="display: none;">Shovel: <span class="shovelTier">Basic (1)</span><br></span>
+					<span class="hoeDisp indent" style="display: none;">Hoe: <span class="hoeTier">Basic (1)</span></span>
+					<span class="sickleDisp indent" style="display: none;">Sickle: <span class="sickleTier">Basic (1)</span><br></span>
 				</details>
 			</div>
 		</div>
+		</td><td style="width: 60%; vertical-align: top;">
 		<!-- Middle Panel (Currently Used For Stats And Actions) -->
-		<div style="display:inline-block; width: 59%; border-style: none; margin: 0; padding: 0;">
+		<div style="display:inline-block; border-style: none; margin: 0; padding: 0;" class="full-width">
 			<div style="margin: 0 0 5 0;">
 				<h3>Stats:</h3>
-				<table style="width: 100%; padding-right: 25px;" class="indent">
+				<table class="indent indent-right full-width">
 					<tr>
 						<td style="width: 25%">
 							Health: <span class="healthValue">10</span>/10
@@ -72,21 +119,33 @@
 					</tr>
 					<tr>
 						<td>
-							<meter class="healthBar" value="10" min="0" max="10" style="width: 100%; height: 5px;"></meter>
+							<!--<meter class="healthBar full-width" value="10" min="0" max="10" style="height: 5px;"></meter>-->
+							<div class="healthContainer" style="position: relative; height: 5px; margin: 0; padding: 0; width: 100%;">
+								<div class="healthBar" style="position: absolute; top: 0; bottom: 0; left: 0; margin:0; padding: 0; right: 0%; background-color: black; border: solid white 1px;"></div>
+							</div>
 						</td>
 						<td>
-							<meter class="hungerBar" value="10" min="0" max="10" style="width: 100%; height: 5px;"></meter>
+							<!--<meter class="hungerBar full-width" value="10" min="0" max="10" style="height: 5px;"></meter>-->
+							<div class="hungerContainer" style="position: relative; height: 5px; margin: 0; padding: 0; width: 100%;">
+								<div class="hungerBar"style="position: absolute; top: 0; bottom: 0; left: 0; margin:0; padding: 0; right: 0%; background-color: black; border: solid white 1px;"></div>
+							</div>
 						</td>
 						<td>
-							<meter class="thirstBar" value="10" min="0" max="10" style="width: 100%; height: 5px;"></meter>
+							<!--<meter class="thirstBar full-width" value="10" min="0" max="10" style="height: 5px;"></meter>-->
+							<div class="thirstContainer" style="position: relative; height: 5px; margin: 0; padding: 0; width: 100%;">
+								<div class="thirstBar"style="position: absolute; top: 0; bottom: 0; left: 0; margin:0; padding: 0; right: 0%; background-color: black; border: solid white 1px;"></div>
+							</div>
 						</td>
 						<td>
-							<meter class="staminaBar" value="10" min="0" max="10" style="width: 100%; height: 5px;"></meter>
+							<!--<meter class="staminaBar full-width" value="10" min="0" max="10" style="height: 5px;"></meter>-->
+							<div class="staminaContainer" style="position: relative; height: 5px; margin: 0; padding: 0; width: 100%;">
+								<div class="staminaBar"style="position: absolute; top: 0; bottom: 0; left: 0; margin:0; padding: 0; right: 0%; background-color: black; border: solid white 1px;"></div>
+							</div>
 						</td>
 					</tr>
 				</table>
 				<hr>
-				<table class="indent" style="width: 100%; padding-right: 25px;">
+				<table class="indent indent-right full-width">
 					<td style="width: 25%">
 						Time: <span class="timeDisp">6:00 AM</span>
 					</td>
@@ -100,7 +159,10 @@
 						Season: <span class="seasonDisp">Spring</span>
 					</td>
 				</table>
-				<meter class="timeBar" value="6" min="0" max="24" style="width: 100%; height: 10px;"></meter>
+				<!--<meter class="timeBar full-width" value="6" min="0" max="24" style="height: 10px;"></meter>-->
+				<div class="timeContainer" style="position: relative; height: 10px; margin: 0; padding: 0; width: auto;">
+					<div class="timeBar"style="position: absolute; top: 0; bottom: 0; left: 0; margin:0; padding: 0; right: 76%; background-color: black; border: solid white 1px;"></div>
+				</div>
 			</div>
 			<div style="margin: 5 0 5 0;">
 				<h3>
@@ -108,20 +170,461 @@
 				</h3>
 				<details open class="basicActions">
 					<summary><b>Basic Actions:</b></summary>
-					<span class="indent">
-						<button class="collectStones">Collect Stones</button>
-						<button class="collectSticks">Collect Branches</button>
-						<button class="collectSticks">Collect Leaves</button>
-						<button class="collectSticks">Collect Wheat Seeds</button>
-						<button class="collectSticks">Rest</button>
-					</span>						
+					<table class="indent indent-right full-width"><tr><td><button class="buttonRest full-width" onclick="rest()">Rest</button></td></tr>
+					</table>
+					<table class="indent indent-right full-width">
+						<tr>
+							<td style="width: 25%;"><button class="collectStones full-width" onclick="collectStones()">Collect Stones</button></td>
+							<td style="width: 25%;"><button class="collectLeaves full-width" onclick="collectLeaves()">Collect Leaves</button></td>
+							<td style="width: 25%;"><button class="collectBranches full-width" onclick="collectBranches()">Collect Branches</button></td>
+							<td style="width: 25%;"><button class="collectWheatSeeds full-width" onclick="collectWheatSeeds()">Collect Wheat Seeds</button></td>
+						</tr>
+						<tr>
+							<td><button class="collectWater full-width" onclick="collectWater()" disabled>Collect Water (0)</button></td>
+							<td><button class="collectBerries full-width" onclick="collectBerries()" disabled>Collect Berries (0)</button></td>
+						</tr>
+						<tr>
+							<td><button class="drinkWater full-width" onclick="drinkWater()" disabled>Drink Water (0)</button></td>
+							<td><button class="eatBerries full-width" onclick="eatBerries()" disabled>Eat Berries (0)</button></td>
+							<td><button class="eatFungus full-width" onclick="eatFungus()" disabled>Eat Fungus (0)</button></td>
+						</tr>
+					</table>
+				</details>
+				<details class="refineActions" style="display: default;" open>
+					<summary><b>Refining:</b></summary>
+					<table class="indent indent-right full-width">
+						<tr>
+							<td style="width: 25%;"><button class="sharpenStoneButton full-width" onclick="sharpenStone()" disabled>Sharpen Stone<hr>Stones (2)</button></td>
+							<td style="width: 25%;"><button class="sewLeavesButton full-width" onclick="sewLeaves()" disabled>Sew Leaves<hr>Leaves (5)<br>Rope (1)</button></td>
+							<td style="width: 25%;"><button class="smoothBranchButton full-width" onclick="smoothBranch()" disabled>Smooth Branch<hr>Sharpened Stone (1)<br>Branch (1)</button></td>
+							<td style="width: 25%;"><button class="makeRopeButton full-width" disabled>Make Rope<hr>Branches (5)<br>Leaves (5)</button></td>
+						</tr>
+					</table>
+			</div>
+			<div style="margin: 5 0 5 0;">
+				<h3>Farming:</h3>
+				<details open class="farmsContainer">
+					<summary><b>Farms:</b></summary>
+					<table class="indent indent-right full-width">
+						<tr>
+							<td style="width: 25%; padding: 2px;"><div class="full-width" style="text-align: center;">
+								<button class="full-width" disabled>Harvest</button>
+								<button style="width: auto;" disabled>Plant</button>
+								<select style="width: auto;">
+									<option value="wheatPlant" selected>Wheat</option>
+									<option style="display: none;">Test</option>
+								</select>
+							</div></td>
+							<td style="width: 25%; padding: 2px;"><div class="full-width">
+							
+							</div></td>
+							<td style="width: 25%; padding: 2px;"><div class="full-width">
+								
+							</div></td>
+							<td style="width: 25%; padding: 2px;"><div class="full-width">
+								
+							</div></td>
+						</tr>
+					</table>
+				</details>
 			</div>
 		</div>
-		<!-- Right Panel (Who Knows What The Future May Hold?) -->
-		<div style="display:inline-block; width: 20%; border-style: none; margin: 0; padding: 0;">
-			<div style="margin: 0;">
-				<h3>lolwot</h3>
+		</td><td style="width: 20%; vertical-align: top;">
+		
+		<!-- Right Panel (Currently used for History and Crafting) -->
+		<div style="display:inline-block; border-style: none; margin: 0; padding: 0;" class="full-width">
+			<div style="margin: 0; height: 200px; overflow: hidden; position: relative;">
+				<h3>History:</h3>
+				<div style="margin : 0; overflow-y: scroll; position: absolute; bottom: 1px; left: 1px; right: 1px; top: 1.5em;">
+					<span>this is a really long test that is used for testing the width of the box</span>
+					<br>
+					<span>test</span>
+					<br>
+					<span>test</span>
+					<br>
+					<span>test</span>
+					<br>
+					<span>test</span>
+				</div>
+			</div>
+			<div style="margin : 0; margin-top: 5;">
+				<h3>Crafting:</h3>
+				<details open>
+					<summary><b>Tools:</b></summary>
+					<span class="indent"><button class="pickaxeButton" disabled>Basic Pickaxe<hr>Sharpened Stone (1)<br>Smooth Branch (1)<br>Rope(1)</button></span>
+					<br>
+					<span class="indent"><button class="axeButton" disabled>Basic Axe<hr>Sharpened Stone (1)<br>Smooth Branch (1)<br>Rope (1)</button></span>
+					<br>
+					<span class="indent"><button class="shovelButton" disabled>Basic Shovel<hr>Sharpened Stone (1)<br>Smooth Branch (1)<br>Rope (1)</button></span>
+					<br>
+					<span class="indent"><button class="hoeButton" disabled>Basic Hoe<hr>Sharpened Stone (1)<br>Smooth Branch (1)<br>Rope (1)</button></span>
+					<br>
+					<span class="indent"><button class="sickleButton" disabled>Basic Sickle<hr>Sharpened Stone (1)<br>Smooth Branch (1)<br>Rope (1)</button></span>
+				</details>
 			</div>
 		</div>
+		</td></tr></table>
+		<script>
+// The variables are initialized at an upper level so all functions have access to them
+			var stoneBank = 0;
+			var branchBank = 0;
+			var leafBank = 0;
+			var wheatSeedBank = 0;
+			var waterBank = 0;
+			var berryBank = 0;
+			var fungusBank = 0;
+			var health = 10;
+			var hunger = 10;
+			var thirst = 10;
+			var stamina = 10;
+			var gameTime = 6;
+			var gameDay = 1;
+			var gameYear = 1;
+			var gameSeason = "Spring";
+			var waterTurns = 0;
+			var berryTurns = 0;
+			var pickaxeTier = 0;
+			var axeTier = 0;
+			var shovelTier = 0;
+			var hoeTier = 0;
+			var sickleTier = 0;
+			var wormBank = 0;
+			var sharpStoneBank = 0;
+			var smoothBranchBank = 0;
+			var ropeBank = 0;
+// This function decreases the 4 main stats by the appropriate amount for most actions, not including actions where some stat(s) could be replenished
+			function action(hu,th,st)
+			{
+				if (hu == 1)
+				{
+					hunger = (hunger * 10 - 1) / 10;
+					if (hunger < 0)
+					{
+						health = ((health * 10) + (hunger * 10)) / 10;
+						hunger = 0;
+					}
+				}
+				if (st == 1)
+				{
+					stamina = (stamina * 10 - 5) / 10;
+					if (stamina < 0)
+					{
+						health = ((health * 10) + (stamina * 10)) / 10;
+						stamina = 0;
+					}
+				}
+				if (th == 1)
+				{
+					thirst = (thirst * 10 -5) / 10;
+					if (thirst < 0)
+					{
+						health = ((health * 10) + (thirst * 10)) / 10;
+						thirst = 0;
+					}
+				}
+				if ( health <= 0)
+				{
+					health = 0;
+				}
+			}
+// This function increments all of the time related stats and updates their graphics on the page
+			function advanceTime()
+			{
+				gameTime += 1;
+				if (gameTime == 25)
+				{
+					gameTime = 1;
+					gameDay += 1;
+					if (gameDay == 91)
+					{
+						gameSeason = "Summer";
+					}
+					else if (gameDay == 182)
+					{
+						gameSeason = "Fall";
+					}
+					else if (gameDay == 273)
+					{
+						gameSeason = "Winter";
+					}
+					else if (gameDay == 366)
+					{
+						gameSeason = "Spring";
+						gameDay = 1
+						gameYear += 1;
+					}
+				}
+				if (gameTime == 12)
+				{
+					document.querySelector(".timeDisp").innerHTML = "12:00 PM";
+				}
+				else if (gameTime == 24)
+				{
+					document.querySelector(".timeDisp").innerHTML = "12:00 AM";
+				}
+				else if (gameTime < 12)
+				{
+					document.querySelector(".timeDisp").innerHTML = gameTime + ":00 AM";
+				}
+				else
+				{
+					document.querySelector(".timeDisp").innerHTML = (gameTime - 12) + ":00 PM";
+				}
+				document.querySelector(".dayDisp").innerHTML = gameDay;
+				document.querySelector(".timeBar").style.right = (100 - gameTime * 4) + "%";
+				document.querySelector(".yearDisp").innerHTML = gameYear;
+				document.querySelector(".seasonDisp").innerHTML = gameSeason;
+			}
+// This function currently only updates the graphics for the 4 main stats on the page, but I may rework it to update every graphical element at some point
+			function updateDisp()
+			{
+				document.querySelector(".healthValue").innerHTML = health;
+				document.querySelector(".healthBar").style.right = (100 - health * 10) + "%";
+				
+				document.querySelector(".hungerValue").innerHTML = hunger;
+				document.querySelector(".hungerBar").style.right = (100 - hunger * 10) + "%";
+				
+				document.querySelector(".thirstValue").innerHTML = thirst;
+				document.querySelector(".thirstBar").style.right = (100 - thirst * 10) + "%";
+				
+				document.querySelector(".staminaValue").innerHTML = stamina;
+				document.querySelector(".staminaBar").style.right = (100 - stamina * 10) + "%";
+				
+				if (stoneBank >= 2)
+				{
+					
+				}
+			}
+// This function is carried out when the 'Rest' button is clicked
+			function rest()
+			{
+				if (randInt(1,2) == 1)
+				{
+					action(1,0,0);
+				}
+				if (randInt (1,2) == 1)
+				{
+					thirst = (thirst * 10 - 1) / 10;
+				}
+				stamina = (stamina * 10 + 10) / 10;
+				if (stamina > 10)
+				{
+					stamina = 10;
+				}
+				if (thirst < 0)
+				{
+					health = ((health * 10) + (thirst * 10)) / 10;
+					thirst = 0;
+				}
+				health = (health * 10 + 1) / 10;
+				if (health > 10)
+				{
+					health = 10;
+				}
+				if (health < 0)
+				{
+					health = 0;
+				}
+				advanceTime();
+				updateDisp();
+			}
+// This function is carried out when the 'Collect Stones' button is clicked
+			function collectStones()
+			{
+				stoneBank += randInt(1,3);
+				document.querySelector(".stoneBank").innerHTML = stoneBank;
+				if (randInt(1,10) == 1)
+				{
+					waterTurns += 5;
+					document.querySelector(".collectWater").innerHTML = "Collect Water (" + waterTurns + ")";
+					document.querySelector(".collectWater").disabled = false;
+					waterBank += 10;
+					document.querySelector(".waterBank").innerHTML = waterBank;
+					document.querySelector(".drinkWater").disabled = false;
+					document.querySelector(".drinkWater").innerHTML = "Drink Water (" + waterBank + ")";
+				}
+				action(1,1,1);
+				advanceTime();
+				updateDisp();
+			}
+// This function is carried out when the 'Collect Water' button is clicked
+			function collectWater()
+			{
+				waterTurns -= 1;
+				document.querySelector(".collectWater").innerHTML = "Collect Water (" + waterTurns + ")";
+				if (waterTurns == 0)
+				{
+					document.querySelector(".collectWater").disabled = true;
+				}
+				waterBank += 10;
+				document.querySelector(".drinkWater").disabled = false;
+				document.querySelector(".waterBank").innerHTML = waterBank;
+				document.querySelector(".drinkWater").innerHTML = "Drink Water (" + waterBank + ")";
+				action(1,1,1);
+				advanceTime();
+				updateDisp();
+			}
+// This function is carried out when the 'Drink Water' button is clicked
+			function drinkWater()
+			{
+				waterBank -= 1;
+				document.querySelector(".waterBank").innerHTML = waterBank;
+				document.querySelector(".drinkWater").innerHTML = "Drink Water (" + waterBank +")";
+				if (waterBank == 0)
+				{
+					document.querySelector(".drinkWater").disabled = true;
+				}
+				stamina = (stamina * 10 + 5) / 10;
+				if (stamina > 10)
+				{
+					stamina = 10;
+				}
+				thirst = (thirst * 10 + 10) / 10;
+				if (thirst > 10)
+				{
+					thirst = 10;
+				}
+				action(1,0,0)
+				advanceTime();
+				updateDisp();
+			}
+// This function is carried out when the 'Collect Branches' button is clicked
+			function collectBranches()
+			{
+				branchBank += randInt(1,3);
+				document.querySelector(".branchBank").innerHTML = branchBank;
+				if (randInt(1,10) == 1)
+				{
+					fungusBank += 5;
+					document.querySelector(".fungusBank").innerHTML = fungusBank;
+					document.querySelector(".eatFungus").disabled = false;
+					document.querySelector(".eatFungus").innerHTML = "Eat Fungus (" + fungusBank + ")";
+				}
+				action(1,1,1);
+				advanceTime();
+				updateDisp();
+			}
+// This function is carried out when the 'Collect Berries' button is clicked
+			function collectBerries()
+			{
+				berryTurns -= 1;
+				document.querySelector(".collectBerries").innerHTML = "Collect Berries (" + berryTurns + ")";
+				if (berryTurns == 0)
+				{
+					document.querySelector(".collectBerries").disabled = true;
+				}
+				berryBank += 3;
+				document.querySelector(".eatBerries").disabled = false;
+				document.querySelector(".berryBank").innerHTML = berryBank;
+				document.querySelector(".eatBerries").innerHTML = "Eat Berries (" + berryBank + ")";
+				action(1,1,1);
+				advanceTime();
+				updateDisp();
+			}
+// This function is carried out when the 'Eat Berries' button is clicked
+			function eatBerries()
+			{
+				berryBank -= 1;
+				document.querySelector(".berryBank").innerHTML = berryBank;
+				document.querySelector(".eatBerries").innerHTML = "Eat Berries (" + berryBank + ")";
+				if (berryBank == 0)
+				{
+					document.querySelector(".eatBerries").disabled = true;
+				}
+				stamina = (stamina * 10 + 5) /10;
+				if (stamina > 10)
+				{
+					stamina = 10;
+				}
+				hunger = (hunger * 10 + 5) / 10;
+				if (hunger > 10)
+				{
+					hunger = 10;
+				}
+				thirst = (thirst * 10 - 1 ) / 10;
+				if (thirst < 0)
+				{
+					health = ((health * 10) + (thirst * 10)) / 10;
+					thirst = 0;
+				}
+				advanceTime();
+				updateDisp();
+			}
+// This function is carried out when the 'Collect Leaves' button is clicked
+			function collectLeaves()
+			{
+				leafBank += randInt(1,3);
+				document.querySelector(".leafBank").innerHTML = leafBank;
+				if (randInt(1,10) == 1)
+				{
+					berryTurns += 3;
+					document.querySelector(".collectBerries").innerHTML = "Collect Berries (" + berryTurns + ")";
+					document.querySelector(".collectBerries").disabled = false;
+					berryBank += 15;
+					document.querySelector(".berryBank").innerHTML = berryBank;
+					document.querySelector(".eatBerries").disabled = false;
+					document.querySelector(".eatBerries").innerHTML = "Eat Berries (" + berryBank + ")";
+				}
+				action(1,1,1);
+				advanceTime();
+				updateDisp();
+			}
+// This function is carried out when the 'Eat Fungus' button is clicked
+			function eatFungus()
+			{
+				fungusBank -= 1;
+				document.querySelector(".fungusBank").innerHTML = fungusBank;
+				document.querySelector(".eatFungus").innerHTML = "Eat Fungus (" + fungusBank + ")";
+				if (fungusBank == 0)
+				{
+					document.querySelector(".eatFungus").disabled = true;
+				}
+				stamina = (stamina * 10 + 5) / 10;
+				if (stamina > 10)
+				{
+					stamina = 10;
+				}
+				hunger = (hunger * 10 + 10) / 10;
+				if (hunger > 10)
+				{
+					hunger = 10;
+				}
+				health = (health * 10 - 5) / 10;
+				if (health < 0)
+				{
+					health = 0;
+				}
+				action(0,1,0);
+				advanceTime();
+				updateDisp();
+			}
+// This function is carried out when the 'Collect Wheat Seeds' button is clicked
+			function collectWheatSeeds()
+			{
+				wheatSeedBank += randInt(1,3);
+				document.querySelector(".wheatSeedBank").innerHTML = wheatSeedBank;
+				if (randInt(1,20) == 1)
+				{
+					wormBank += 5;
+				}
+				action(1,1,1);
+				advanceTime();
+				updateDisp();
+			}
+// This function makes it easier to generate random integers and is used frequently in other functions
+			function randInt(min,max)
+			{
+				return Math.floor(Math.random()*(max - min + 1)) + min;
+			}
+
+// TODO
+//
+// Figure out dialog box
+//
+// Add tool crafting
+//
+// Add an action section for tool-related collecting
+//
+		</script>
 	</body>
 </html>
