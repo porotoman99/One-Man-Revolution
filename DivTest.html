@@ -37,6 +37,18 @@
 		</title>
 	</head>
 	<body>
+		<!-- An invisible overlay which appears when the player dies -->
+		<div class="deadBox" style="position:absolute; display: none; background-color: rgba(0,0,0,0.5); z-index: 100; left: 0px; right: 0px; top: 0px; bottom: 0px;">
+			<div style="z-index: 1000; margin: 0 auto; background-color: rgba(255,255,255,1); width:30%; height: 30%; margin-top: 10%;">
+				<h2 style="text-align: center; margin-top: 20%;">
+					You have managed to die, and you must start anew...
+				</h2>
+				<br>
+				<button style=" width: auto; text-align: center; margin-left: 45%; margin-right: 45%;">
+					Start Anew
+				</button>
+			</div>
+		</div>
 		<!-- Title and description of game -->
 		<table class="full-width" style="padding: 0;"><tr><td>
 		<div style="margin: 0 auto; text-align: center;">
@@ -200,6 +212,7 @@
 							<td style="width: 25%;"><button class="makeRopeButton full-width" disabled>Make Rope<hr>Branches (5)<br>Leaves (5)</button></td>
 						</tr>
 					</table>
+				</details>
 			</div>
 			<div style="margin: 5 0 5 0;">
 				<h3>Farming:</h3>
@@ -395,6 +408,11 @@
 					
 				}
 			}
+// This function is carried out when the player dies from any means
+			function dead()
+			{
+				document.querySelector(".deadBox").style.display = "block"
+			}
 // This function is carried out when the 'Rest' button is clicked
 			function rest()
 			{
@@ -404,7 +422,7 @@
 				}
 				if (randInt (1,2) == 1)
 				{
-					thirst = (thirst * 10 - 1) / 10;
+					action(0,1,0);
 				}
 				stamina = (stamina * 10 + 10) / 10;
 				if (stamina > 10)
@@ -416,14 +434,14 @@
 					health = ((health * 10) + (thirst * 10)) / 10;
 					thirst = 0;
 				}
+				if (health <= 0)
+				{
+					dead();
+				}
 				health = (health * 10 + 1) / 10;
 				if (health > 10)
 				{
 					health = 10;
-				}
-				if (health < 0)
-				{
-					health = 0;
 				}
 				advanceTime();
 				updateDisp();
@@ -624,6 +642,8 @@
 // Add tool crafting
 //
 // Add an action section for tool-related collecting
+//
+// Add saving
 //
 		</script>
 	</body>
