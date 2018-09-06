@@ -1,0 +1,281 @@
+<style>
+	div
+	{
+		border-style: solid;
+		border-width: 1px;
+		margin: 5;
+		padding: 1;
+		vertical-align: top;
+	}
+	.border
+	{
+		border-style: solid;
+		border-width: 1px;
+	}
+	h2, h3, h5
+	{
+		margin-top: 1;
+		margin-bottom: 1;
+	}
+	.indent
+	{
+		padding-left: 25px;
+	}
+	.indent-right
+	{
+		padding-right: 25px;
+	}
+	.full-width
+	{
+		width: 100%;
+	}
+</style>
+<html>
+	<head>
+		<title>
+			One-Man Revolution
+		</title>
+	</head>
+	<body>
+		<!-- An invisible overlay which appears when the player dies -->
+		<div class="deadBox" style="position:absolute; display: none; background-color: rgba(0,0,0,0.5); z-index: 100; left: 0px; right: 0px; top: 0px; bottom: 0px;">
+			<div style="z-index: 1000; margin: 0 auto; background-color: rgba(255,255,255,1); width:30%; height: 30%; margin-top: 10%;">
+				<h2 style="text-align: center; margin-top: 20%;">
+					You have managed to die, and you must start anew...
+				</h2>
+				<br>
+				<button style=" width: auto; text-align: center; margin-left: 45%; margin-right: 45%;">
+					Start Anew
+				</button>
+			</div>
+		</div>
+		<!-- Title and description of game -->
+		<table class="full-width" style="padding: 0;"><tr><td>
+		<div style="margin: 0 auto; text-align: center;">
+			<h2>
+				One-Man Revolution
+			</h2>
+			<h5>
+				A permadeath turn-based incremental
+			</h5>
+		</div>
+		</td></tr></table>
+		<table class="full-width"><tr><td style="width: 20%; vertical-align: top;">
+		<!-- Left Panel (Currently Used For Inventory) -->
+		<div style="display:inline-block; border-style: none; margin: 0; padding: 0;" class="full-width">
+			<div class="inventoryList" style="margin: 0;">
+				<h3>
+					Items:
+				</h3>
+				<details open>
+					<summary><b>Raw Materials:</b></summary>
+					<span class="stoneCount indent">Stones: <span class="stoneBank">0</span></span>
+					<br>
+					<span class="leafCount indent">Leaves: <span class="leafBank">0</span></span>
+					<br>
+					<span class="branchCount indent">Branches: <span class="branchBank">0</span></span>
+					<br>
+					<span class="wheatSeedCount indent">Wheat Seeds: <span class="wheatSeedBank">0</span></span>
+				</details>
+				<details open>
+					<summary><b>Consumables:</b></summary>
+					<span class="waterCount indent">Water: <span class="waterBank">0</span></span>
+					<br>
+					<span class="berryCount indent">Berries: <span class="berryBank">0</span></span>
+					<br>
+					<span class="fungusCount indent">Fungus: <span class="fungusBank">0</span></span>
+				</details>
+				<details open>
+					<summary><b>Refined Materials:</b></summary>
+					<span class="sharpStoneCount indent">Sharpened Stones: <span class="sharpStoneBank">0</span></span>
+					<br>
+					<span class="leafTarpCount indent">Leaf Tarps: <span class="leafTarpBank">0</span></span>
+					<br>
+					<span class="smoothBranchCount indent">Smooth Branches: <span class="smoothBranchBank">0</span></span>
+					<br>
+					<span class="ropeCount indent">Rope: <span class="ropeBank">0</span></span>
+				</details>
+			</div>
+			<div class="toolList" style="margin: 5 0 0 0; display: none;">
+				<details open>
+					<summary>
+						<b>Tools:</b>
+					</summary>
+					<span class="pickaxeDisp indent" style="display: none;">Pickaxe: <span class="pickaxeTier">Basic (1)</span><br></span>
+					<span class="axeDisp indent" style="display: none;">Axe: <span class="axeTier">Basic (1)</span><br></span>
+					<span class="shovelDisp indent" style="display: none;">Shovel: <span class="shovelTier">Basic (1)</span><br></span>
+					<span class="hoeDisp indent" style="display: none;">Hoe: <span class="hoeTier">Basic (1)</span></span>
+					<span class="sickleDisp indent" style="display: none;">Sickle: <span class="sickleTier">Basic (1)</span><br></span>
+				</details>
+			</div>
+		</div>
+		</td><td style="width: 60%; vertical-align: top;">
+		<!-- Middle Panel (Currently Used For Stats And Actions) -->
+		<div style="display:inline-block; border-style: none; margin: 0; padding: 0;" class="full-width">
+			<div style="margin: 0 0 5 0;">
+				<h3>Stats:</h3>
+				<table class="indent indent-right full-width">
+					<tr>
+						<td style="width: 25%">
+							Health: <span class="healthValue">10</span>/10
+						</td>
+						<td style="width: 25%">
+							Hunger: <span class="hungerValue">10</span>/10
+						</td>
+						<td style="width: 25%">
+							Thirst: <span class="thirstValue">10</span>/10
+						</td>
+						<td style="width: 25%">
+							Stamina: <span class="staminaValue">10</span>/10
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<!--<meter class="healthBar full-width" value="10" min="0" max="10" style="height: 5px;"></meter>-->
+							<div class="healthContainer" style="position: relative; height: 5px; margin: 0; padding: 0; width: 100%;">
+								<div class="healthBar" style="position: absolute; top: 0; bottom: 0; left: 0; margin:0; padding: 0; right: 0%; background-color: black; border: solid white 1px;"></div>
+							</div>
+						</td>
+						<td>
+							<!--<meter class="hungerBar full-width" value="10" min="0" max="10" style="height: 5px;"></meter>-->
+							<div class="hungerContainer" style="position: relative; height: 5px; margin: 0; padding: 0; width: 100%;">
+								<div class="hungerBar"style="position: absolute; top: 0; bottom: 0; left: 0; margin:0; padding: 0; right: 0%; background-color: black; border: solid white 1px;"></div>
+							</div>
+						</td>
+						<td>
+							<!--<meter class="thirstBar full-width" value="10" min="0" max="10" style="height: 5px;"></meter>-->
+							<div class="thirstContainer" style="position: relative; height: 5px; margin: 0; padding: 0; width: 100%;">
+								<div class="thirstBar"style="position: absolute; top: 0; bottom: 0; left: 0; margin:0; padding: 0; right: 0%; background-color: black; border: solid white 1px;"></div>
+							</div>
+						</td>
+						<td>
+							<!--<meter class="staminaBar full-width" value="10" min="0" max="10" style="height: 5px;"></meter>-->
+							<div class="staminaContainer" style="position: relative; height: 5px; margin: 0; padding: 0; width: 100%;">
+								<div class="staminaBar"style="position: absolute; top: 0; bottom: 0; left: 0; margin:0; padding: 0; right: 0%; background-color: black; border: solid white 1px;"></div>
+							</div>
+						</td>
+					</tr>
+				</table>
+				<hr>
+				<table class="indent indent-right full-width">
+					<td style="width: 25%">
+						Time: <span class="timeDisp">6:00 AM</span>
+					</td>
+					<td style="width: 25%">
+						Day: <span class="dayDisp">1</span>
+					</td>
+					<td style="width: 25%">
+						Year: <span class="yearDisp">1</span>
+					</td>
+					<td style="width: 25%">
+						Season: <span class="seasonDisp">Spring</span>
+					</td>
+				</table>
+				<!--<meter class="timeBar full-width" value="6" min="0" max="24" style="height: 10px;"></meter>-->
+				<div class="timeContainer" style="position: relative; height: 10px; margin: 0; padding: 0; width: auto;">
+					<div class="timeBar"style="position: absolute; top: 0; bottom: 0; left: 0; margin:0; padding: 0; right: 76%; background-color: black; border: solid white 1px;"></div>
+				</div>
+			</div>
+			<div style="margin: 5 0 5 0;">
+				<h3>
+					Actions:
+				</h3>
+				<details open class="basicActions">
+					<summary><b>Basic Actions:</b></summary>
+					<table class="indent indent-right full-width"><tr><td><button class="buttonRest full-width" onclick="rest()">Rest</button></td></tr>
+					</table>
+					<table class="indent indent-right full-width">
+						<tr>
+							<td style="width: 25%;"><button class="collectStones full-width" onclick="collectStones()">Collect Stones</button></td>
+							<td style="width: 25%;"><button class="collectLeaves full-width" onclick="collectLeaves()">Collect Leaves</button></td>
+							<td style="width: 25%;"><button class="collectBranches full-width" onclick="collectBranches()">Collect Branches</button></td>
+							<td style="width: 25%;"><button class="collectWheatSeeds full-width" onclick="collectWheatSeeds()">Collect Wheat Seeds</button></td>
+						</tr>
+						<tr>
+							<td><button class="collectWater full-width" onclick="collectWater()" disabled>Collect Water (0)</button></td>
+							<td><button class="collectBerries full-width" onclick="collectBerries()" disabled>Collect Berries (0)</button></td>
+						</tr>
+						<tr>
+							<td><button class="drinkWater full-width" onclick="drinkWater()" disabled>Drink Water (0)</button></td>
+							<td><button class="eatBerries full-width" onclick="eatBerries()" disabled>Eat Berries (0)</button></td>
+							<td><button class="eatFungus full-width" onclick="eatFungus()" disabled>Eat Fungus (0)</button></td>
+						</tr>
+					</table>
+				</details>
+				<details class="refineActions" style="display: default;" open>
+					<summary><b>Refining:</b></summary>
+					<table class="indent indent-right full-width">
+						<tr>
+							<td style="width: 25%;"><button class="sharpenStoneButton full-width" onclick="sharpenStone()" disabled>Sharpen Stone<hr>Stones (2)</button></td>
+							<td style="width: 25%;"><button class="sewLeavesButton full-width" onclick="sewLeaves()" disabled>Sew Leaves<hr>Leaves (5)<br>Rope (1)</button></td>
+							<td style="width: 25%;"><button class="smoothBranchButton full-width" onclick="smoothBranch()" disabled>Smooth Branch<hr>Sharpened Stone (1)<br>Branch (1)</button></td>
+							<td style="width: 25%;"><button class="makeRopeButton full-width" onclick="makeRope()" disabled>Make Rope<hr>Branches (5)<br>Leaves (5)</button></td>
+						</tr>
+					</table>
+				</details>
+			</div>
+			<div style="margin: 5 0 5 0;">
+				<h3>Farming:</h3>
+				<details open class="farmsContainer">
+					<summary><b>Farms:</b></summary>
+					<table class="indent indent-right full-width">
+						<tr>
+							<td style="width: 25%; padding: 2px;"><div class="full-width" style="text-align: center;">
+								<button class="full-width" disabled>Harvest</button>
+								<button style="width: auto;" disabled>Plant</button>
+								<select style="width: auto;">
+									<option value="wheatPlant" selected>Wheat</option>
+									<option style="display: none;">Test</option>
+								</select>
+							</div></td>
+							<td style="width: 25%; padding: 2px;"><div class="full-width">
+							
+							</div></td>
+							<td style="width: 25%; padding: 2px;"><div class="full-width">
+								
+							</div></td>
+							<td style="width: 25%; padding: 2px;"><div class="full-width">
+								
+							</div></td>
+						</tr>
+					</table>
+				</details>
+			</div>
+		</div>
+		</td><td style="width: 20%; vertical-align: top;">
+		<!-- Right Panel (Currently used for History and Tool Crafting) -->
+		<div style="display:inline-block; border-style: none; margin: 0; padding: 0;" class="full-width">
+			<div style="margin: 0; height: 200px; overflow: hidden; position: relative;">
+				<h3>History:</h3>
+				<div style="margin : 0; overflow-y: scroll; position: absolute; bottom: 1px; left: 1px; right: 1px; top: 1.5em;">
+					<span>this is a really long test that is used for testing the width of the box</span>
+					<br>
+					<span>test</span>
+					<br>
+					<span>test</span>
+					<br>
+					<span>test</span>
+					<br>
+					<span>test</span>
+				</div>
+			</div>
+			<div style="margin : 0; margin-top: 5;">
+				<h3>Crafting:</h3>
+				<details open>
+					<summary><b>Tools:</b></summary>
+					<span class="indent"><button class="pickaxeButton" onclick="upgradePickaxe()" disabled>Basic Pickaxe<hr>Sharpened Stone (1)<br>Smooth Branch (1)<br>Rope(1)</button></span>
+					<br>
+					<span class="indent"><button class="axeButton" onclick="upgradeAxe()" disabled>Basic Axe<hr>Sharpened Stone (1)<br>Smooth Branch (1)<br>Rope (1)</button></span>
+					<br>
+					<span class="indent"><button class="shovelButton" onclick="upgradeShovel()" disabled>Basic Shovel<hr>Sharpened Stone (1)<br>Smooth Branch (1)<br>Rope (1)</button></span>
+					<br>
+					<span class="indent"><button class="hoeButton" onclick="upgradeHoe()" disabled>Basic Hoe<hr>Sharpened Stone (1)<br>Smooth Branch (1)<br>Rope (1)</button></span>
+					<br>
+					<span class="indent"><button class="sickleButton" onclick="upgradeSickle()" disabled>Basic Sickle<hr>Sharpened Stone (1)<br>Smooth Branch (1)<br>Rope (1)</button></span>
+				</details>
+			</div>
+		</div>
+		</td></tr></table>
+		<script type="text/javascript" src="sGameCode.js"></script>
+	</body>
+</html>

@@ -1,0 +1,205 @@
+<style>
+	.code
+	{
+		font-family: monospace;
+		font-size: 12px;
+		background: #333333;
+		border-color: #272822;
+		border-width: 3px;
+		border-style: solid;
+	}
+	.red
+	{
+		color: #F92659;
+	}
+	.white
+	{
+		color: #F8F8F8;
+	}
+	.indent
+	{
+		margin-left: 15px;
+	}
+    .comment
+    {
+        color: #75755E;
+    }
+</style>
+
+<html>
+	<head>
+		<title>
+			HTML Tutorial
+		</title>
+	</head>
+	<body style="background: #F7F7F7;">
+		<hr />
+		<h1 class="indent" style="font-family: Arial;">
+			Introduction
+		</h1>
+		<hr />
+		<p>
+			This is the body of the HTML document.
+		</p>
+		<p>
+			Everything you are reading here can be found inside of two sets of HTML brackets.
+		</p>
+		<p>
+			These brackets are <span class="code red">&lt;html>&lt;/html></span> and <span class="code red">&lt;body>&lt;/body></span>.
+		</p>
+		<p>
+			Each line of text is also in another bracket called <span class="code red">&lt;p>&lt;/p></span>.
+		</p>
+		<p>
+			These elements are structured like this:
+		</p>
+		<div class="indent code" style="display: inline-block;">
+			<p class="red">
+				&lt;html>
+				<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;body>
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p><span class="white">This is the body of the HTML document.</span>&lt;/p>
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p><span class="white">Everything you are reading here can be found inside of two sets of HTML brackets.</span>&lt;/p>
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;/body>
+				<br />
+				&lt;/html>
+			</p>
+		</div>
+		<p>
+			This structure can be expanded simply by adding more <span class="code red">&lt;p>&lt;/p></span> brackets.
+		</p>
+		<p>
+			There are many other bracket types that HTML offers such as <span class="code red">&lt;h1>&lt;/h1></span>, <span class="code red">&lt;a>&lt;/a></span>, and <span class="code red">&lt;img>&lt;/img></span>.
+		</p>
+		<p>
+			On this page, I will attempt to explain as many of the HTML elements as I can and show how they can be used to make a website.
+		</p>
+		<p>
+			From this point on, I will leave out the <span class="code" style="color: #FF7777;">&lt;html>&lt;/html></span> and <span class="code" style="color: #FF7777;">&lt;body>&lt;/body></span> brackets from code examples to save space and focus on each new topic.
+		</p>
+		<p>
+			The previous block of code would then be written like this to avoid redundancy:
+		</p>
+		<div class="code" style="margin-left: 15px; display: inline-block;">
+			<br />
+			<span style="color: #FF7777;">&lt;p></span><span style="color: #FFFFFF;">This is the body of the HTML document.</span><span style="color: #FF7777;">&lt;/p></span>
+			<br />
+			<span style="color: #FF7777;">&lt;p></span><span style="color: #FFFFFF;">Everything you are reading here can be found inside of two sets of HTML brackets.</span><span style="color: #FF7777;">&lt;/p></span>
+			<br />
+			<br />
+		</div>
+		<hr />
+		<h2 style="font-family: Arial;" class="indent">
+			Headers
+		</h2>
+		<hr />
+		<p>
+			Headers can usually be found at the top of webpages and at the top of sections.
+		</p>
+		<p>
+			To create a header, you would use the bracket <span class="code" style="color: #FF7777;">&lt;h#>&lt;/h#></span>, where <span class="code" style="color: #FF7777;">#</span> is replaced by a number.
+		</p>
+		<p>
+			These are the possible header sizes:
+		</p>
+		<h1>
+			This is h1.
+		</h1>
+		<h2>
+			This is h2.
+		</h2>
+		<h3>
+			This is h3.
+		</h3>
+		<!--
+			Papa bless.
+		-->
+		<h4>
+			This is h4.
+		</h4>
+		<h5>
+			This is h5.
+		</h5>
+		<h6>
+			This is h6.
+		</h6>
+		<p>
+			Here is what the code would look like:
+		</p>
+		<div class="code" style="margin-left: 15px; display: inline-block;">
+            <br />
+			<span class="red">&lt;h1></span><span class="white">This is h1.</span><span class="red">&lt;/h1></span>
+            <br />
+            <span class="red">&lt;h2></span><span class="white">This is h2.</span><span class="red">&lt;/h2></span>
+            <br />
+            <span class="red">&lt;h3></span><span class="white">This is h3.</span><span class="red">&lt;/h3></span>
+            <br />
+            <span class="red">&lt;h4></span><span class="white">This is h4.</span><span class="red">&lt;/h4></span>
+            <br />
+            <span class="red">&lt;h5></span><span class="white">This is h5.</span><span class="red">&lt;/h5></span>
+            <br />
+            <span class="red">&lt;h6></span><span class="white">This is h6.</span><span class="red">&lt;/h6></span>
+            <br />
+            <br />
+		</div>
+        <p>
+            Effectively, the header bracket just changes the font size and makes it bold.
+        </p>
+        <p>
+            More customization is available if you manually adjust these values, but using a header bracket can be simpler.
+        </p>
+        <hr />
+        <h2 class="indent" style="font-family: Arial;">
+            Comments
+        </h2>
+        <hr />
+        <p>
+            Comments are sections of code that are not processed in any way.
+        </p>
+        <!--
+            Like this one!
+        -->
+        <p>
+            They do not affect the appearance of the web page in any way, but they can be helpful to add reminders, explanations, or any other kind of note to an HTML file.
+        </p>
+        <p>
+            Between the last two lines of text, I added a comment.
+        </p>
+        <p>
+            If I had not told you this, you would have no way of knowing a comment was there other than checking the code itself.
+        </p>
+        <p>
+            To make a comment, a more unique bracket, <span class="code comment">&lt;!-- --></span>, is used.
+        </p>
+        <p>
+            This is what the comment bracket looks like in use:
+        </p>
+        <div class="code indent" style="display: inline-block;">
+            <br />
+            <span class="red">&lt;p></span><span class="white">Comments are sections of code that are not processed in any way.</span><span class="red">&lt;/p></span>
+            <br />
+            <span class="comment">&lt;!-- Like this one! --></span>
+            <br />
+            <span class="comment">&lt;!-- &lt;p>Other brackets can be commented out too!&lt;/p> --></span>
+            <br />
+            <br />
+        </div>
+		<p>
+			Comments can be used to explain what a section of code is supposed to do for anyone who looks at your code, including your future-self!
+		<p/>
+        <hr />
+		<h2 class="indent" style="font-family: Arial;">
+			Tables
+		</h2>
+		<hr />
+		<p>
+			Tables can be used to display information in an organised way.
+		</p>
+		<p>
+			Chances are, you already know what a table looks like, but I will show you how to make one in html!
+		</p>
+	</body>
+</html>

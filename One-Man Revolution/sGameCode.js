@@ -26,6 +26,10 @@
 			var smoothBranchBank = 0;
 			var ropeBank = 0;
 			var leafTarpBank = 0;
+			var tinOreBank = 0;
+			var tinIngotBank = 0;
+			var woodHandleBank = 0;
+			var stonePegBank = 0;
 // This function decreases the 4 main stats by the appropriate amount for most actions, not including actions where some stat(s) could be replenished
 			function action(hu,th,st)
 			{
@@ -112,11 +116,6 @@
 // This function updates various graphical elements
 			function updateDisp()
 			{
-// Checks if the player has died
-				if (health <= 0)
-				{
-					dead();
-				}
 // Updates the numbers and graphics for the 4 main stats
 				document.querySelector(".healthValue").innerHTML = health;
 				document.querySelector(".healthBar").style.right = (100 - health * 10) + "%";
@@ -174,11 +173,132 @@
 				{
 					document.querySelector(".makeRopeButton").disabled = true;
 				}
+				if (pickaxeTier == 0)
+				{
+					if (sharpStoneBank >= 1 && smoothBranchBank >= 1 && ropeBank >= 1)
+					{
+						document.querySelector(".pickaxeButton").disabled = false;
+					}
+					else
+					{
+						document.querySelector(".pickaxeButton").disabled = true;
+					}
+				}
+				else if (pickaxeTier == 1)
+				{
+					if (tinIngotBank >= 1 && woodHandleBank >= 1 && stonePegBank >= 2)
+					{
+						document.querySelector(".pickaxeButton").disable = false;
+					}
+					else
+					{
+						document.querySelector(".pickaxeButton").disable = true;
+					}
+				}
+				if (axeTier == 0)
+				{
+					if (sharpStoneBank >= 1 && smoothBranchBank >= 1 && ropeBank >= 1)
+					{
+						document.querySelector(".axeButton").disabled = false;
+					}
+					else
+					{
+						document.querySelector(".axeButton").disabled = true;
+					}
+				}
+				else if (axeTier == 1)
+				{
+					if (tinIngotBank >= 1 && woodHandleBank >= 1 && stonePegBank >= 2)
+					{
+						document.querySelector(".axeButton").disable = false;
+					}
+					else
+					{
+						document.querySelector(".axeButton").disable = true;
+					}
+				}
+				if (shovelTier == 0)
+				{
+					if (sharpStoneBank >= 1 && smoothBranchBank >= 1 && ropeBank >= 1)
+					{
+						document.querySelector(".shovelButton").disabled = false;
+					}
+					else
+					{
+						document.querySelector(".shovelButton").disabled = true;
+					}
+				}
+				else if (shovelTier == 1)
+				{
+					if (tinIngotBank >= 1 && woodHandleBank >= 1 && stonePegBank >= 2)
+					{
+						document.querySelector(".shovelButton").disable = false;
+					}
+					else
+					{
+						document.querySelector(".shovelButton").disable = true;
+					}
+				}
+				if (hoeTier == 0)
+				{
+					if (sharpStoneBank >= 1 && smoothBranchBank >= 1 && ropeBank >= 1)
+					{
+						document.querySelector(".hoeButton").disabled = false;
+					}
+					else
+					{
+						document.querySelector(".hoeButton").disabled = true;
+					}
+				}
+				else if (hoeTier == 1)
+				{
+					if (tinIngotBank >= 1 && woodHandleBank >= 1 && stonePegBank >= 2)
+					{
+						document.querySelector(".hoeButton").disable = false;
+					}
+					else
+					{
+						document.querySelector(".hoeButton").disable = true;
+					}
+				}
+				if (sickleTier == 0)
+				{
+					if (sharpStoneBank >= 1 && smoothBranchBank >= 1 && ropeBank >= 1)
+					{
+						document.querySelector(".sickleButton").disabled = false;
+					}
+					else
+					{
+						document.querySelector(".sickleButton").disabled = true;
+					}
+				}
+				else if (sickleTier == 1)
+				{
+					if (tinIngotBank >= 1 && woodHandleBank >= 1 && stonePegBank >= 2)
+					{
+						document.querySelector(".sickleButton").disable = false;
+					}
+					else
+					{
+						document.querySelector(".sickleButton").disable = true;
+					}
+				}
+// Checks if the player has died
+				if (health <= 0)
+				{
+					dead();
+				}
 			}
 // This function is carried out when the player dies from any means
 			function dead()
 			{
 				document.querySelector(".deadBox").style.display = "block"
+				var buttons = document.getElementsByTagName("button");
+				for (var i = 0; i < buttons.length; i++)
+				{
+					buttons[i].disabled = true;
+				}
+				window.setTimeout(refreshPage, 5000);
 			}
 // This function is carried out when the 'Rest' button is clicked
 			function rest()
@@ -387,6 +507,11 @@
 			{
 				return Math.floor(Math.random()*(max - min + 1)) + min;
 			}
+//This function is used to refresh the page after the player dies
+			function refreshPage()
+			{
+				window.location.reload(true);
+			}
 // This function is carried out when the 'Sharpen Stone' button is clicked
 			function sharpenStone()
 			{
@@ -427,20 +552,83 @@
 				updateDisp();
 			}
 // This function is carried out when the 'X Pickaxe' button is clicked
-
+			function upgradePickaxe()
+			{
+				if (pickaxeTier == 0)
+				{
+					sharpStoneBank--;
+					smoothBranchBank--;
+					ropeBank--;
+					document.querySelector(".pickaxeButton").innerHTML = "Tin Pickaxe<hr>Tin Ingot (1)<br>Wooden Handle (1)<br>Stone Peg (2)";
+				}
+				pickaxeTier++;
+				action(1,1,1);
+				advanceTime();
+				updateDisp();
+			}
 // This function is carried out when the 'X Axe' button is clicked
-
+			function upgradeAxe()
+			{
+				if (axeTier == 0)
+				{
+					sharpStoneBank--;
+					smoothBranchBank--;
+					ropeBank--;
+					document.querySelector(".axeButton").innerHTML = "Tin Axe<hr>Tin Ingot (1)<br>Wooden Handle (1)<br>Stone Peg (2)";
+				}
+				axeTier++;
+				action(1,1,1);
+				advanceTime();
+				updateDisp();
+			}
 // This function is carried out when the 'X Shovel' button is clicked
-
+			function upgradeShovel()
+			{
+				if (shovelTier == 0)
+				{
+					sharpStoneBank--;
+					smoothBranchBank--;
+					ropeBank--;
+					document.querySelector(".shovelButton").innerHTML = "Tin Shovel<hr>Tin Ingot (1)<br>Wooden Handle (1)<br>Stone Peg (2)";
+				}
+				shovelTier++;
+				action(1,1,1);
+				advanceTime();
+				updateDisp();
+			}
 // This function is carried out when the 'X Hoe' button is clicked
-
+			function upgradeHoe()
+			{
+				if (hoeTier == 0)
+				{
+					sharpStoneBank--;
+					smoothBranchBank--;
+					ropeBank--;
+					document.querySelector(".hoeButton").innerHTML = "Tin Hoe<hr>Tin Ingot (1)<br>Wooden Handle (1)<br>Stone Peg (2)";
+				}
+				hoeTier++;
+				action(1,1,1);
+				advanceTime();
+				updateDisp();
+			}
 // This function is carried out when the 'X Sickle' button is clicked
-			
+			function upgradeSickle()
+			{
+				if (sickleTier == 0)
+				{
+					sharpStoneBank--;
+					smoothBranchBank--;
+					ropeBank--;
+					document.querySelector(".sickleButton").innerHTML = "Tin Sickle<hr>Tin Ingot (1)<br>Wooden Handle (1)<br>Stone Peg (2)";
+				}
+				sickleTier++;
+				action(1,1,1);
+				advanceTime();
+				updateDisp();
+			}
 // TODO
 //
 // Figure out dialog box
-//
-// Add tool crafting
 //
 // Add an action section for tool-related collecting
 //
