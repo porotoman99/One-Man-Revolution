@@ -12,7 +12,7 @@
 		border-style: solid;
 		border-width: 1px;
 	}
-	h2, h3, h5
+	h2, h3, h4, h5
 	{
 		margin-top: 1;
 		margin-bottom: 1;
@@ -37,36 +37,29 @@
 		</title>
 	</head>
 	<body>
-		<!-- An invisible overlay which appears when the player dies -->
+<!-- An invisible overlay which appears when the player dies -->
 		<div class="deadBox" style="position:absolute; display: none; background-color: rgba(0,0,0,0.5); z-index: 100; left: 0px; right: 0px; top: 0px; bottom: 0px;">
 			<div style="z-index: 1000; margin: 0 auto; background-color: rgba(255,255,255,1); width:30%; height: 30%; margin-top: 10%;">
 				<h2 style="text-align: center; margin-top: 20%;">
 					You have managed to die, and you must start anew...
 				</h2>
 				<br>
-				<button style=" width: auto; text-align: center; margin-left: 45%; margin-right: 45%;">
-					Start Anew
-				</button>
 			</div>
 		</div>
-		<!-- Title and description of game -->
+<!-- Title and description of game -->
 		<table class="full-width" style="padding: 0;"><tr><td>
 		<div style="margin: 0 auto; text-align: center;">
-			<h2>
-				One-Man Revolution
-			</h2>
-			<h5>
-				A permadeath turn-based incremental
-			</h5>
+			<h2>One-Man Revolution</h2>
+			<h4>V0.4.1</h4>
+			<h5>A permadeath turn-based incremental</h5>
 		</div>
 		</td></tr></table>
 		<table class="full-width"><tr><td style="width: 20%; vertical-align: top;">
-		<!-- Left Panel (Currently Used For Inventory) -->
+<!-- Left Panel (Currently Used For Inventory) -->
 		<div style="display:inline-block; border-style: none; margin: 0; padding: 0;" class="full-width">
+<!-- Inventory Box -->
 			<div class="inventoryList" style="margin: 0;">
-				<h3>
-					Items:
-				</h3>
+				<h3>Items:</h3>
 				<details open>
 					<summary><b>Raw Materials:</b></summary>
 					<span class="stoneCount indent">Stones: <span class="stoneBank">0</span></span>
@@ -85,8 +78,12 @@
 					<br>
 					<span class="fungusCount indent">Fungus: <span class="fungusBank">0</span></span>
 				</details>
+				<details open style="display: none;">
+					<summary><b>Bait:</b></summary>
+					<span class="wormCount indent">Worms: <span class="wormBank">0</span></span>
+				</details>
 				<details open>
-					<summary><b>Refined Materials:</b></summary>
+					<summary><b>Tier 0 Materials:</b></summary>
 					<span class="sharpStoneCount indent">Sharpened Stones: <span class="sharpStoneBank">0</span></span>
 					<br>
 					<span class="leafTarpCount indent">Leaf Tarps: <span class="leafTarpBank">0</span></span>
@@ -96,6 +93,7 @@
 					<span class="ropeCount indent">Rope: <span class="ropeBank">0</span></span>
 				</details>
 			</div>
+<!-- Tool Box -->
 			<div class="toolList" style="margin: 5 0 0 0; display: none;">
 				<details open>
 					<summary>
@@ -110,8 +108,9 @@
 			</div>
 		</div>
 		</td><td style="width: 60%; vertical-align: top;">
-		<!-- Middle Panel (Currently Used For Stats And Actions) -->
+<!-- Middle Panel (Currently Used For Stats And Actions) -->
 		<div style="display:inline-block; border-style: none; margin: 0; padding: 0;" class="full-width">
+<!-- Stats Box -->
 			<div style="margin: 0 0 5 0;">
 				<h3>Stats:</h3>
 				<table class="indent indent-right full-width">
@@ -176,10 +175,9 @@
 					<div class="timeBar"style="position: absolute; top: 0; bottom: 0; left: 0; margin:0; padding: 0; right: 76%; background-color: black; border: solid white 1px;"></div>
 				</div>
 			</div>
+<!-- Actions Box -->
 			<div style="margin: 5 0 5 0;">
-				<h3>
-					Actions:
-				</h3>
+				<h3>Actions:</h3>
 				<details open class="basicActions">
 					<summary><b>Basic Actions:</b></summary>
 					<table class="indent indent-right full-width"><tr><td><button class="buttonRest full-width" onclick="rest()">Rest</button></td></tr>
@@ -214,7 +212,8 @@
 					</table>
 				</details>
 			</div>
-			<div style="margin: 5 0 5 0;">
+<!-- Farming Box -->
+			<div style="margin: 5 0 5 0; display: none;">
 				<h3>Farming:</h3>
 				<details open class="farmsContainer">
 					<summary><b>Farms:</b></summary>
@@ -243,11 +242,13 @@
 			</div>
 		</div>
 		</td><td style="width: 20%; vertical-align: top;">
-		<!-- Right Panel (Currently used for History and Tool Crafting) -->
+<!-- Right Panel (Currently used for History and Tool Crafting) -->
 		<div style="display:inline-block; border-style: none; margin: 0; padding: 0;" class="full-width">
+<!-- History Box -->
 			<div style="margin: 0; height: 200px; overflow: hidden; position: relative;">
 				<h3>History:</h3>
-				<div style="margin : 0; overflow-y: scroll; position: absolute; bottom: 1px; left: 1px; right: 1px; top: 1.5em;">
+				<div class="historyBox" style="margin : 0; overflow-y: scroll; position: absolute; bottom: 1px; left: 1px; right: 1px; top: 1.5em;">
+					<span></span>
 					<span>this is a really long test that is used for testing the width of the box</span>
 					<br>
 					<span>test</span>
@@ -259,6 +260,7 @@
 					<span>test</span>
 				</div>
 			</div>
+<!-- Crafting Box -->
 			<div style="margin : 0; margin-top: 5;">
 				<h3>Crafting:</h3>
 				<details open>
