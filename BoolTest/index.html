@@ -1,0 +1,29 @@
+<head>
+	<title>
+		Boolean Test
+	</title>
+</head>
+<body>
+	<button onclick="valUp()">+</button>
+	<button onclick="boolTest()">Test value</button>
+	<button onclick="valDown()">-</button>
+	<p><span>x = </span><span class="xVal">0</span></p>
+	<p><span>!x = </span><span class="xNot">true</span></p>
+</body>
+<script>
+var x = 0;
+function valUp()
+{
+	x++;
+	document.querySelector(".xVal").innerHTML = x;
+}
+function valDown()
+{
+	x--;
+	document.querySelector(".xVal").innerHTML = x;
+}
+function boolTest()
+{
+	document.querySelector(".xNot").innerHTML = !x;
+}
+</script>

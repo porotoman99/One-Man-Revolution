@@ -140,7 +140,7 @@
 				document.querySelector(".leafTarpBank").innerHTML = leafTarpBank;
 				document.querySelector(".smoothBranchBank").innerHTML = smoothBranchBank;
 				document.querySelector(".ropeBank").innerHTML = ropeBank;
-// Updates various buttons' disabled status
+// Updates various buttons' disabled status and inner text
 				if (stoneBank >= 2)
 				{
 					document.querySelector(".sharpenStoneButton").disabled = false;
@@ -186,13 +186,14 @@
 				}
 				else if (pickaxeTier == 1)
 				{
+					document.querySelector(".pickaxeButton").innerHTML = "Tin Pickaxe<hr>Tin Ingot (1)<br>Wooden Handle (1)<br>Stone Peg (2)";
 					if (tinIngotBank >= 1 && woodHandleBank >= 1 && stonePegBank >= 2)
 					{
-						document.querySelector(".pickaxeButton").disable = false;
+						document.querySelector(".pickaxeButton").disabled = false;
 					}
 					else
 					{
-						document.querySelector(".pickaxeButton").disable = true;
+						document.querySelector(".pickaxeButton").disabled = true;
 					}
 				}
 				if (axeTier == 0)
@@ -208,13 +209,14 @@
 				}
 				else if (axeTier == 1)
 				{
+					document.querySelector(".axeButton").innerHTML = "Tin Axe<hr>Tin Ingot (1)<br>Wooden Handle (1)<br>Stone Peg (2)";
 					if (tinIngotBank >= 1 && woodHandleBank >= 1 && stonePegBank >= 2)
 					{
-						document.querySelector(".axeButton").disable = false;
+						document.querySelector(".axeButton").disabled = false;
 					}
 					else
 					{
-						document.querySelector(".axeButton").disable = true;
+						document.querySelector(".axeButton").disabled = true;
 					}
 				}
 				if (shovelTier == 0)
@@ -230,13 +232,14 @@
 				}
 				else if (shovelTier == 1)
 				{
+					document.querySelector(".shovelButton").innerHTML = "Tin Shovel<hr>Tin Ingot (1)<br>Wooden Handle (1)<br>Stone Peg (2)";
 					if (tinIngotBank >= 1 && woodHandleBank >= 1 && stonePegBank >= 2)
 					{
-						document.querySelector(".shovelButton").disable = false;
+						document.querySelector(".shovelButton").disabled = false;
 					}
 					else
 					{
-						document.querySelector(".shovelButton").disable = true;
+						document.querySelector(".shovelButton").disabled = true;
 					}
 				}
 				if (hoeTier == 0)
@@ -252,13 +255,14 @@
 				}
 				else if (hoeTier == 1)
 				{
+					document.querySelector(".hoeButton").innerHTML = "Tin Hoe<hr>Tin Ingot (1)<br>Wooden Handle (1)<br>Stone Peg (2)";
 					if (tinIngotBank >= 1 && woodHandleBank >= 1 && stonePegBank >= 2)
 					{
-						document.querySelector(".hoeButton").disable = false;
+						document.querySelector(".hoeButton").disabled = false;
 					}
 					else
 					{
-						document.querySelector(".hoeButton").disable = true;
+						document.querySelector(".hoeButton").disabled = true;
 					}
 				}
 				if (sickleTier == 0)
@@ -274,15 +278,27 @@
 				}
 				else if (sickleTier == 1)
 				{
+					document.querySelector(".sickleButton").innerHTML = "Tin Sickle<hr>Tin Ingot (1)<br>Wooden Handle (1)<br>Stone Peg (2)";
 					if (tinIngotBank >= 1 && woodHandleBank >= 1 && stonePegBank >= 2)
 					{
-						document.querySelector(".sickleButton").disable = false;
+						document.querySelector(".sickleButton").disabled = false;
 					}
 					else
 					{
-						document.querySelector(".sickleButton").disable = true;
+						document.querySelector(".sickleButton").disabled = true;
 					}
 				}
+				document.querySelector(".collectWater").innerHTML = "Collect Water (" + waterTurns + ")";
+				document.querySelector(".collectWater").disabled = !waterTurns;
+				document.querySelector(".drinkWater").innerHTML = "Drink Water (" + waterBank + ")";
+				document.querySelector(".drinkWater").disabled = !waterBank;
+				document.querySelector(".collectBerries").innerHTML = "Collect Berries (" + berryTurns + ")";
+				document.querySelector(".collectBerries").disabled = !berryTurns;
+				document.querySelector(".eatBerries").innerHTML = "Eat Berries (" + berryBank + ")";
+				
+				document.querySelector(".eatFungus").innerHTML = "Eat Fungus (" + fungusBank + ")";
+				document.querySelector(".eatFungus").disabled = !fungusBank;
+				
 // Checks if the player has died
 				if (health <= 0)
 				{
@@ -336,11 +352,7 @@
 				if (randInt(1,10) == 1)
 				{
 					waterTurns += 5;
-					document.querySelector(".collectWater").innerHTML = "Collect Water (" + waterTurns + ")";
-					document.querySelector(".collectWater").disabled = false;
 					waterBank += 10;
-					document.querySelector(".drinkWater").disabled = false;
-					document.querySelector(".drinkWater").innerHTML = "Drink Water (" + waterBank + ")";
 				}
 				action(1,1,1);
 				advanceTime();
@@ -349,15 +361,8 @@
 // This function is carried out when the 'Collect Water' button is clicked
 			function collectWater()
 			{
-				waterTurns -= 1;
-				document.querySelector(".collectWater").innerHTML = "Collect Water (" + waterTurns + ")";
-				if (waterTurns == 0)
-				{
-					document.querySelector(".collectWater").disabled = true;
-				}
+				waterTurns--;
 				waterBank += 10;
-				document.querySelector(".drinkWater").disabled = false;
-				document.querySelector(".drinkWater").innerHTML = "Drink Water (" + waterBank + ")";
 				action(1,1,1);
 				advanceTime();
 				updateDisp();
@@ -366,11 +371,6 @@
 			function drinkWater()
 			{
 				waterBank -= 1;
-				document.querySelector(".drinkWater").innerHTML = "Drink Water (" + waterBank +")";
-				if (waterBank == 0)
-				{
-					document.querySelector(".drinkWater").disabled = true;
-				}
 				stamina = (stamina * 10 + 5) / 10;
 				if (stamina > 10)
 				{
@@ -392,8 +392,6 @@
 				if (randInt(1,10) == 1)
 				{
 					fungusBank += 5;
-					document.querySelector(".eatFungus").disabled = false;
-					document.querySelector(".eatFungus").innerHTML = "Eat Fungus (" + fungusBank + ")";
 				}
 				action(1,1,1);
 				advanceTime();
@@ -403,15 +401,8 @@
 			function collectBerries()
 			{
 				berryTurns -= 1;
-				document.querySelector(".collectBerries").innerHTML = "Collect Berries (" + berryTurns + ")";
-				if (berryTurns == 0)
-				{
-					document.querySelector(".collectBerries").disabled = true;
-				}
 				berryBank += 3;
 				document.querySelector(".eatBerries").disabled = false;
-				document.querySelector(".berryBank").innerHTML = berryBank;
-				document.querySelector(".eatBerries").innerHTML = "Eat Berries (" + berryBank + ")";
 				action(1,1,1);
 				advanceTime();
 				updateDisp();
@@ -420,7 +411,6 @@
 			function eatBerries()
 			{
 				berryBank -= 1;
-				document.querySelector(".eatBerries").innerHTML = "Eat Berries (" + berryBank + ")";
 				if (berryBank == 0)
 				{
 					document.querySelector(".eatBerries").disabled = true;
@@ -448,15 +438,12 @@
 			function collectLeaves()
 			{
 				leafBank += randInt(1,3);
-				
 				if (randInt(1,10) == 1)
 				{
 					berryTurns += 3;
-					document.querySelector(".collectBerries").innerHTML = "Collect Berries (" + berryTurns + ")";
 					document.querySelector(".collectBerries").disabled = false;
 					berryBank += 15;
 					document.querySelector(".eatBerries").disabled = false;
-					document.querySelector(".eatBerries").innerHTML = "Eat Berries (" + berryBank + ")";
 				}
 				action(1,1,1);
 				advanceTime();
@@ -466,11 +453,6 @@
 			function eatFungus()
 			{
 				fungusBank -= 1;
-				document.querySelector(".eatFungus").innerHTML = "Eat Fungus (" + fungusBank + ")";
-				if (fungusBank == 0)
-				{
-					document.querySelector(".eatFungus").disabled = true;
-				}
 				stamina = (stamina * 10 + 5) / 10;
 				if (stamina > 10)
 				{
@@ -559,7 +541,6 @@
 					sharpStoneBank--;
 					smoothBranchBank--;
 					ropeBank--;
-					document.querySelector(".pickaxeButton").innerHTML = "Tin Pickaxe<hr>Tin Ingot (1)<br>Wooden Handle (1)<br>Stone Peg (2)";
 				}
 				pickaxeTier++;
 				action(1,1,1);
@@ -574,7 +555,6 @@
 					sharpStoneBank--;
 					smoothBranchBank--;
 					ropeBank--;
-					document.querySelector(".axeButton").innerHTML = "Tin Axe<hr>Tin Ingot (1)<br>Wooden Handle (1)<br>Stone Peg (2)";
 				}
 				axeTier++;
 				action(1,1,1);
@@ -589,7 +569,6 @@
 					sharpStoneBank--;
 					smoothBranchBank--;
 					ropeBank--;
-					document.querySelector(".shovelButton").innerHTML = "Tin Shovel<hr>Tin Ingot (1)<br>Wooden Handle (1)<br>Stone Peg (2)";
 				}
 				shovelTier++;
 				action(1,1,1);
@@ -604,7 +583,6 @@
 					sharpStoneBank--;
 					smoothBranchBank--;
 					ropeBank--;
-					document.querySelector(".hoeButton").innerHTML = "Tin Hoe<hr>Tin Ingot (1)<br>Wooden Handle (1)<br>Stone Peg (2)";
 				}
 				hoeTier++;
 				action(1,1,1);
@@ -619,7 +597,6 @@
 					sharpStoneBank--;
 					smoothBranchBank--;
 					ropeBank--;
-					document.querySelector(".sickleButton").innerHTML = "Tin Sickle<hr>Tin Ingot (1)<br>Wooden Handle (1)<br>Stone Peg (2)";
 				}
 				sickleTier++;
 				action(1,1,1);
