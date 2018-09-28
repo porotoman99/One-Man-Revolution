@@ -1,0 +1,89 @@
+<style>
+	.indent1
+	{
+		margin-left: 1em;
+	}
+	.indent2
+	{
+		margin-left: 2em;
+	}
+	.indent3
+	{
+		margin-left: 3em;
+	}
+	.indent4
+	{
+		margin-left: 4em;
+	}
+	.bold
+	{
+		font-weight: bold;
+	}
+	.code
+	{
+		font-family: monospace;
+		font-size: 12px;
+		background: #333333;
+		border-color: #272822;
+		border-width: 3px;
+		border-style: solid;
+	}
+	.red
+	{
+		color: #F92659;
+	}
+	.white
+	{
+		color: #F8F8F8;
+	}
+	.comment
+    {
+        color: #75755E;
+    }
+	td
+	{
+		white-space: nowrap;
+	}
+	.normal
+	{
+		font-weight: normal;
+		text-decoration: none;
+	}
+</style>
+<html>
+	<head>
+		<title>MSP430 ASM</title>
+	</head>
+	<body style="background-color: #D4D4D4;">
+		<hr>
+		<h1 class="indent1">MSP430 Assembly Tutorial</h1>
+		<hr>
+		<h2 class="indent1">Contents</h2>
+		<a class="indent2" href="#opcodes">Opcodes</a>
+		<br>
+		<a class="indent3" href="#add">add</a>
+		<hr>
+		<h2 class="indent1" name="opcodes">Opcodes</h2>
+		<hr>
+		<h3 class="indent2" name="add">add(.w/.b)</h3>
+		<p class="indent3">add x,y will add together the values of x and y, and then store the result in y.</p>
+		<table class="indent4 code">
+			<tr>
+				<td class="red">01</td>
+				<td class="white">&nbsp;<a class="normal white" href="#mov">mov</a> #0001h,&0200h</td>
+				<td class="comment">&nbsp;;the value 0001h is moved into memory location 0x0200
+			</tr>
+			<tr>
+				<td class="red">02</td>
+				<td class="white">&nbsp;<a class="normal white" href="#mov">mov</a> #0003h,&0202h</td>
+				<td class="comment">&nbsp;;the value 0003h is moved into memory location 0x0202</td>
+			</tr>
+			<tr>
+				<td class="red">03</td>
+				<td class="white">&nbsp;<a class="normal white" href="#add">add</a> &0200h,&0202h</td>
+				<td class="comment">&nbsp;;the value stored in 0x0200 (0001h) and the value stored in 0x0202 (0003h) are added together (0004h) and stored in 0x0202</td>
+			</td>
+		</table>
+		<hr>
+	</body>
+</html>
