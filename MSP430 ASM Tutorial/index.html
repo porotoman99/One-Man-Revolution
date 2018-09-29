@@ -36,9 +36,13 @@
 	{
 		color: #F8F8F8;
 	}
+	.black
+	{
+		color: #000000;
+	}
 	.comment
     {
-        color: #75755E;
+        color: #808060;
     }
 	td
 	{
@@ -65,13 +69,15 @@
 		<a class="indent3" href="#add">add</a>
 		<br>
 		<a class="indent3" href="#addc">addc</a>
+		<br>
+		<a class="indent3" href="#dadd">dadd</a>
 <!-- End Contents -->
 		<hr>
-		<h2 class="indent1" name="opcodes">Opcodes</h2>
+		<h2 class="indent1" id="opcodes">Opcodes</h2>
 		<hr>
 <!-- ADD -->
-		<h3 class="indent2" name="add">add(.w/.b)</h3>
-		<p class="indent3">add x,y will add together the values of x and y, and then store the result in y.</p>
+		<h3 class="indent2" id="add">add(.w/.b)</h3>
+		<p class="indent3"><span class="code white"><a href="#add" class="normal white">add</a> x,y</span> will add together the values of <span class="code white">x</span> and <span class="code white">y</span>, and then store the result in <span class="code white">y</span>.</p>
 		<table class="indent4 code">
 			<tr>
 				<td class="red">01</td>
@@ -91,40 +97,41 @@
 		</table>
 		<hr>
 <!-- ADDC -->
-		<h3 class="indent2" name="addc">addc(.w/.b)</h3>
+		<h3 class="indent2" id="addc">addc(.w/.b)</h3>
+		<p class="indent3"><span class="code white"><a href="#addc" class="normal white">addc</a> x,y</span> will add together the values of <span class="code white">x</span>, <span class="white code">y</span>, and the <span><a class="normal white code" href="#sr_c">C</a></span> register, and then store the result in <span class="code white">y</span>.</p>
 		<hr>
 <!-- DADD -->
-		<h3 class="indent2" name="dadd">dadd(.w/.b)</h3>
+		<h3 class="indent2" id="dadd">dadd(.w/.b)</h3>
 		<hr>
 <!-- SUB -->
-		<h3 class="indent2" name="sub">sub(.w/.b)</h3>
+		<h3 class="indent2" id="sub">sub(.w/.b)</h3>
 		<hr>
 <!-- SUBC -->
-		<h3 class="indent2" name="subc">subc(.w/.b)</h3>
+		<h3 class="indent2" id="subc">subc(.w/.b)</h3>
 		<hr>
 <!-- AND -->
-		<h3 class="indent2" name="and">and(.w/.b)</h3>
+		<h3 class="indent2" id="and">and(.w/.b)</h3>
 		<hr>
 <!-- BIC -->
-		<h3 class="indent2" name="bic">bic(.w/.b)</h3>
+		<h3 class="indent2" id="bic">bic(.w/.b)</h3>
 		<hr>
 <!-- BIS -->
-		<h3 class="indent2" name="bis">bis(.w/.b)</h3>
+		<h3 class="indent2" id="bis">bis(.w/.b)</h3>
 		<hr>
 <!-- BIT -->
-		<h3 class="indent2" name="bit">bit(.w/.b)</h3>
+		<h3 class="indent2" id="bit">bit(.w/.b)</h3>
 		<hr>
 <!-- XOR -->
-		<h3 class="indent2" name="xor">xor(.w/.b)</h3>
+		<h3 class="indent2" id="xor">xor(.w/.b)</h3>
 		<hr>
 <!-- CMP -->
-		<h3 class="indent2" name="cmp">cmp(.w/.b)</h3>
+		<h3 class="indent2" id="cmp">cmp(.w/.b)</h3>
 		<hr>
 <!-- MOV -->
-		<h3 class="indent2" name="mov">mov(.w/.b)</h3>
+		<h3 class="indent2" id="mov">mov(.w/.b)</h3>
 		<hr>
 <!-- AAA -->
-		<h3 class="indent2" name="aaa">aaa(.w/.b)</h3>
+		<h3 class="indent2" id="aaa">aaa(.w/.b)</h3>
 		<hr>
 	</body>
 </html>
