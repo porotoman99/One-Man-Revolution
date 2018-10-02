@@ -51,7 +51,7 @@
 	.normal
 	{
 		font-weight: normal;
-		text-decoration: none;
+/*		text-decoration: none; */
 	}
 </style>
 <html>
@@ -71,13 +71,40 @@
 		<a class="indent3" href="#addc">addc</a>
 		<br>
 		<a class="indent3" href="#dadd">dadd</a>
+		<br>
+		<a class="indent3" href="#sub">sub</a>
+		<br>
+		<a class="indent3" href="#subc">subc</a>
+		<br>
+		<a class="indent3" href="#and">and</a>
+		<br>
+		<a class="indent3" href="#bic">bic</a>
+		<br>
+		<a class="indent3" href="#bis">bis</a>
+		<br>
+		<a class="indent3" href="#bit">bit</a>
+		<br>
+		<a class="indent3" href="#bis">bis</a>
+		<br>
+		<a class="indent3" href="#bit">bit</a>
+		<br>
+		<a class="indent3" href="#xor">xor</a>
+		<br>
+		<a class="indent3" href="#cmp">cmp</a>
+		<br>
+		<a class="indent3" href="#mov">mov</a>
 <!-- End Contents -->
 		<hr>
+<!-- Opcodes -->
 		<h2 class="indent1" id="opcodes">Opcodes</h2>
+		<p class="indent3">Opcodes are the simplest instructions that can be given to a processor. Opcodes are binary instructions that are sent to a processor to tell it what instruction to perform on some number of inputs. Since binary and hexacecimal instructions are not optimal for human understanding, assembly languages represent these values as mnemonics such as <span class="code white"><a href="#add" class="normal white">add</a></span>, <span class="code white"><a href="#jmp" class="normal white">jmp</a></span>, <span class="white code"><a href="#mov" class="normal white">mov</a></span>, and many others.</p>
+		<p class="indent3">There are three types of opcodes: Double-Operand, Single-Operand, and Jumps. Double-Operand opcodes take two arguments and perform some sort of action between the two. Single-Operand opcodes only take one argument and perform some sort of basic action on it. Jump opcodes move the processor to another section of the code by evaluating the <span class="code"><a href="#sr_n" class="normal white">N</a></span>, <span class="code"><a href="#sr_z" class="normal white">Z</a></span>, <span class="code"><a href="#sr_v" class="normal white">V</a></span>, and <span class="code"><a href="#sr_c" class="normal white">C</a></span> <a href="#sr">system registers</a></p>
+		<p class="indent3">In addition to this, there are also emulated opcodes. Emulated opcodes are not actually instructions for the processor, but rather, they are a simplification of another opcode for a specific purpose. When your code is compiled, the compiler automatically translates these emulated opcodes into real opcodes that the processor can understand.</p>
+		<p class="indent3">In total, there are 27 opcodes and 24 emulated opcodes for the MSP430. Each of these are explained in detail below.</p>
 		<hr>
 <!-- ADD -->
 		<h3 class="indent2" id="add">add(.w/.b)</h3>
-		<p class="indent3"><span class="code white"><a href="#add" class="normal white">add</a> x,y</span> will add together the values of <span class="code white">x</span> and <span class="code white">y</span>, and then store the result in <span class="code white">y</span>.</p>
+		<p class="indent3"><span class="code white">add x,y</span> will add together the values of <span class="code white">x</span> and <span class="code white">y</span>, and then store the result in <span class="code white">y</span>.</p>
 		<table class="indent4 code">
 			<tr>
 				<td class="red">01</td>
@@ -91,14 +118,14 @@
 			</tr>
 			<tr>
 				<td class="red">03</td>
-				<td class="white">&nbsp;<a class="normal white" href="#add">add</a> &0200h,&0202h </td>
+				<td class="white">&nbsp;add &0200h,&0202h </td>
 				<td class="comment">&nbsp;;the value stored in 0x0200 (0001h) and the value stored in 0x0202 (0003h) are added together (0004h) and stored in 0x0202</td>
 			</tr>
 		</table>
 		<hr>
 <!-- ADDC -->
 		<h3 class="indent2" id="addc">addc(.w/.b)</h3>
-		<p class="indent3"><span class="code white"><a href="#addc" class="normal white">addc</a> x,y</span> will add together the values of <span class="code white">x</span>, <span class="white code">y</span>, and the <span><a class="normal white code" href="#sr_c">C</a></span> register, and then store the result in <span class="code white">y</span>.</p>
+		<p class="indent3"><span class="code white">addc x,y</span> will add together the values of <span class="code white">x</span>, <span class="white code">y</span>, and the <span><a class="normal white code" href="#sr_c">C</a></span> register, and then store the result in <span class="code white">y</span>.</p>
 		<hr>
 <!-- DADD -->
 		<h3 class="indent2" id="dadd">dadd(.w/.b)</h3>
