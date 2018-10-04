@@ -98,50 +98,90 @@
 		<br>
 		<a class="indent3" href="#sr_pc">PC / Program Counter</a>
 		<br>
-		<a class="indent3" href="#sr_sp">SP</a>
+		<a class="indent3" href="#sr_sp">SP / Stack Pointer</a>
+		<br>
+		<a class="indent3" href="#sr_v">V / Overflow Bit</a>
 		<br>
 		<a class="indent3" href="#sr_n">N / Negative Bit</a>
 		<br>
 		<a class="indent3" href="#sr_z">Z / Zero Bit</a>
-		<br>
-		<a class="indent3" href="#sr_v">V / Overflow Bit</a>
 		<br>
 		<a class="indent3" href="#sr_c">C / Carry Bit</a>
 		<hr>
 <!-- Opcodes -->
 		<h2 class="indent1" id="opcodes">Opcodes</h2>
 		<p class="indent3">Opcodes are the simplest instructions that can be given to a processor. Opcodes are binary instructions that are sent to a processor to tell it what instruction to perform on some number of inputs. Since binary and hexacecimal instructions are not optimal for human understanding, assembly languages represent these values as mnemonics such as <span class="code white"><a href="#add" class="normal white">add</a></span>, <span class="code white"><a href="#jmp" class="normal white">jmp</a></span>, <span class="white code"><a href="#mov" class="normal white">mov</a></span>, and many others.</p>
-		<p class="indent3">There are three types of opcodes: Double-Operand, Single-Operand, and Jumps. Double-Operand opcodes take two arguments and perform some sort of action between the two. Single-Operand opcodes only take one argument and perform some sort of basic action on it. Jump opcodes move the processor to another section of the code by evaluating the <span class="code"><a href="#sr_n" class="normal white">N</a></span>, <span class="code"><a href="#sr_z" class="normal white">Z</a></span>, <span class="code"><a href="#sr_v" class="normal white">V</a></span>, and <span class="code"><a href="#sr_c" class="normal white">C</a></span> <a href="#sr">system registers</a></p>
+		<p class="indent3">There are three types of opcodes: Double-Operand, Single-Operand, and Jumps. Double-Operand opcodes take two arguments and perform some sort of action between the two. Single-Operand opcodes only take one argument and perform some sort of basic action on it. Jump opcodes move the processor to another section of the code by evaluating the <span class="code"><a href="#sr_v" class="normal white">V</a></span>, <span class="code"><a href="#sr_n" class="normal white">N</a></span>, <span class="code"><a href="#sr_z" class="normal white">Z</a></span>, and <span class="code"><a href="#sr_c" class="normal white">C</a></span> <a href="#sr">system registers</a></p>
 		<p class="indent3">In addition to this, there are also emulated opcodes. Emulated opcodes are not actually instructions for the processor, but rather, they are a simplification of another opcode for a specific purpose. When your code is compiled, the compiler automatically translates these emulated opcodes into real opcodes that the processor can understand.</p>
 		<p class="indent3">In total, there are 27 opcodes and 24 emulated opcodes for the MSP430. Each of these are explained in detail below.</p>
 		<hr>
 <!-- ADD -->
 		<h3 class="indent2" id="add">add(.w/.b)</h3>
-		<p class="indent3"><span class="code white">add x,y</span> will add together the values of <span class="code white">x</span> and <span class="code white">y</span>, and then store the result in <span class="code white">y</span>.</p>
+		<p class="indent3"><span class="code white">add x,y</span> will add together the values of <span class="code white">x</span> and <span class="code white">y</span>, and then store the result in <span class="code white">y</span>. Here is an example:</p>
 		<table class="indent4 code">
 			<tr>
 				<td class="red">01</td>
-				<td class="white">&nbsp;<a class="normal white" href="#mov">mov</a> #0001h,&0200h </td>
-				<td class="comment">&nbsp;;the value 0001h is moved into memory location 0x0200</td>
+				<td class="white">&nbsp;<a class="normal white" href="#mov">mov</a> #0007h,&0200h </td>
+				<td class="comment">&nbsp;;the value 0007h is copied into memory location 0x0200</td>
 			</tr>
 			<tr>
 				<td class="red">02</td>
 				<td class="white">&nbsp;<a class="normal white" href="#mov">mov</a> #0003h,&0202h </td>
-				<td class="comment">&nbsp;;the value 0003h is moved into memory location 0x0202</td>
+				<td class="comment">&nbsp;;the value 0003h is copied into memory location 0x0202</td>
 			</tr>
 			<tr>
 				<td class="red">03</td>
 				<td class="white">&nbsp;add &0200h,&0202h </td>
-				<td class="comment">&nbsp;;the value stored in 0x0200 (0001h) and the value stored in 0x0202 (0003h) are added together (0004h) and stored in 0x0202</td>
+				<td class="comment">&nbsp;;the value stored in 0x0200 (0007h) and the value stored in 0x0202 (0003h) are added together (000Ah) and stored in 0x0202</td>
 			</tr>
 		</table>
 		<hr>
 <!-- ADDC -->
 		<h3 class="indent2" id="addc">addc(.w/.b)</h3>
-		<p class="indent3"><span class="code white">addc x,y</span> will add together the values of <span class="code white">x</span>, <span class="white code">y</span>, and the <span><a class="normal white code" href="#sr_c">C</a></span> register, and then store the result in <span class="code white">y</span>.</p>
+		<p class="indent3"><span class="code white">addc x,y</span> will add together the values of <span class="code white">x</span>, <span class="white code">y</span>, and the <span><a class="normal white code" href="#sr_c">C</a></span> <a href="#sr" class="normal">register</a>, and then store the result in <span class="code white">y</span>. Here is an example:</p>
+		<table class="indent4 code">
+			<tr>
+				<td class="red">01</td>
+				<td class="white">&nbsp;<a href="#setc" class="normal white">setc</a></td>
+				<td class="comment">&nbsp;;the <a href="#sr" class="normal comment">system register</a> <a href="sr_c" class="normal comment">C</a> is set to 1</td>
+			</tr>
+			<tr>
+				<td class="red">02</td>
+				<td class="white">&nbsp;<a class="normal white" href="#mov">mov</a> #0004h,&0200h </td>
+				<td class="comment">&nbsp;;the value 0004h is copied into memory location 0x0200</td>
+			</tr>
+			<tr>
+				<td class="red">03</td>
+				<td class="white">&nbsp;<a class="normal white" href="#mov">mov</a> #0005h,&0202h </td>
+				<td class="comment">&nbsp;;the value 0005h is copied into memory location 0x0202</td>
+			</tr>
+			<tr>
+				<td class="red">04</td>
+				<td class="white">&nbsp;addc &0200h,&0202h </td>
+				<td class="comment">&nbsp;;the value stored in 0x0200 (0004h), the value stored in 0x0202 (0005h), and the <a href="#sr_c" class="normal comment">C</a> <a href="sr" class="normal comment">register</a> (1) are added together (000Ah) and stored in 0x0202</td>
+			</tr>
+		</table>
 		<hr>
 <!-- DADD -->
 		<h3 class="indent2" id="dadd">dadd(.w/.b)</h3>
+		<p class="indent3"><span class="white code">dadd x,y</span> will add together the values of <span class="code white">x</span> and <span class="white code">y</span>, while treating <span class="code white">x</span> and <span class="white code">y</span> as decimal numbers instead of hexadecimal numbers. Here is an example:</p>
+		<table class="indent4 code">
+			<tr>
+				<td class="red">01</td>
+				<td class="white">&nbsp;<a class="normal white" href="#mov">mov</a> #0009h,&0200h </td>
+				<td class="comment">&nbsp;;the value 0009h is copied into memory location 0x0200</td>
+			</tr>
+			<tr>
+				<td class="red">02</td>
+				<td class="white">&nbsp;<a class="normal white" href="#mov">mov</a> #0001h,&0202h </td>
+				<td class="comment">&nbsp;;the value 0001h is copied into memory location 0x0202</td>
+			</tr>
+			<tr>
+				<td class="red">03</td>
+				<td class="white">&nbsp;dadd &0200h,&0202h </td>
+				<td class="comment">&nbsp;;the value stored in 0x0200 (0009h) and the value stored in 0x0202 (0001h) are treated as decimal numbers and added together (0010h) and stored in 0x0202</td>
+			</tr>
+		</table>
 		<hr>
 <!-- SUB -->
 		<h3 class="indent2" id="sub">sub(.w/.b)</h3>
@@ -182,27 +222,142 @@
 		<p class="indent3">The program counter is a register that is used by the processor to keep track of where it is in the code.</p>
 		<hr>
 <!-- SP -->
-		<h3 class="indent2" id="sr_sp">SP</h3>
-		<hr>
-<!-- N / Negative Bit -->
-		<h3 class="indent2" id="sr_n">N / Negative Bit</h3>
-		<p class="indent3">The <span class="code white">N</span> register is a system register that is set to one when the value of the previous operation results in a negative value, or is set to zero when the result is not negative.</p>
-		<p class="indent3">The following <a href="#opcodes">opcodes</a> are able to alter <span class="white code">N</span>:</p>
-		<hr>
-<!-- Z / Zero Bit -->
-		<h3 class="indent2" id="sr_z">Z / Zero Bit</h3>
-		<p class="indent3">The <span class="white code">Z</span> register is a system register that is set to one when the value of the previous operation results in zero, or is set to zero when the result is not zero.</p>
-		<p class="indent3">The following <a href="#opcodes">opcodes</a> are able to alter <span class="white code">Z</span>:</p>
+		<h3 class="indent2" id="sr_sp">SP / Stack Pointer</h3>
+		<p class="indent3">The stack pointer is a register that is used by the processor to keep track of where it is in the stack.</p>
 		<hr>
 <!-- V / Overflow Bit -->
 		<h3 class="indent2" id="sr_v">V / Overflow Bit</h3>
 		<p class="indent3">The <span class="white code">V</span> register is a system register that is set to one when the value of the previous operation results in an overflow, or is set to zero when the result does not produce an overflow.</p>
 		<p class="indent3">The following <a href="#opcodes">opcodes</a> are able to alter <span class="white code">V</span>:</p>
+		<details class="indent2">
+		<summary>Click to show list</summary>
+		<p class="indent1"><a href="#add" class="indent4 normal white code">add</a></p>
+		<p class="indent1"><a href="#addc" class="indent4 normal white code">addc</a></p>
+		<p class="indent1"><a href="#dadd" class="indent4 normal white code">dadd</a></p>
+		<p class="indent1"><a href="#sub" class="indent4 normal white code">sub</a></p>
+		<p class="indent1"><a href="#subc" class="indent4 normal white code">subc</a></p>
+		<p class="indent1"><a href="#and" class="indent4 normal white code">and</a> (always sets <span class="white code">V</span> to 0)</p>
+		<p class="indent1"><a href="#bit" class="indent4 normal white code">bit</a> (always sets <span class="white code">V</span> to 0)</p>
+		<p class="indent1"><a href="#xor" class="indent4 normal white code">xor</a></p>
+		<p class="indent1"><a href="#cmp" class="indent4 normal white code">cmp</a></p>
+		<p class="indent1"><a href="#rra" class="indent4 normal white code">rra</a> (always sets <span class="white code">V</span> to 0)</p>
+		<p class="indent1"><a href="#rrc" class="indent4 normal white code">rrc</a></p>
+		<p class="indent1"><a href="#sxt" class="indent4 normal white code">sxt</a> (always sets <span class="white code">V</span> to 0)</p>
+		<p class="indent1"><a href="#reti" class="indent4 normal white code">reti</a></p>
+		<p class="indent1"><a href="#adc" class="indent4 normal white code">adc</a></p>
+		<p class="indent1"><a href="#dadc" class="indent4 normal white code">dadc</a></p>
+		<p class="indent1"><a href="#dec" class="indent4 normal white code">dec</a></p>
+		<p class="indent1"><a href="#decd" class="indent4 normal white code">decd</a></p>
+		<p class="indent1"><a href="#inc" class="indent4 normal white code">inc</a></p>
+		<p class="indent1"><a href="#incd" class="indent4 normal white code">incd</a></p>
+		<p class="indent1"><a href="#sbc" class="indent4 normal white code">sbc</a></p>
+		<p class="indent1"><a href="#inv" class="indent4 normal white code">inv</a></p>
+		<p class="indent1"><a href="#rla" class="indent4 normal white code">rla</a></p>
+		<p class="indent1"><a href="#rlc" class="indent4 normal white code">rlc</a></p>
+		<p class="indent1"><a href="#tst" class="indent4 normal white code">tst</a> (always sets <span class="white code">V</span> to 0)</p>
+		</details>
+		<hr>
+<!-- N / Negative Bit -->
+		<h3 class="indent2" id="sr_n">N / Negative Bit</h3>
+		<p class="indent3">The <span class="code white">N</span> register is a system register that is set to one when the value of the previous operation results in a negative value, or is set to zero when the result is not negative.</p>
+		<p class="indent3">The following <a href="#opcodes">opcodes</a> are able to alter <span class="white code">N</span>:</p>
+		<details class="indent2">
+		<summary>Click to show list</summary>
+		<p class="indent1"><a href="#add" class="indent4 normal white code">add</a></p>
+		<p class="indent1"><a href="#addc" class="indent4 normal white code">addc</a></p>
+		<p class="indent1"><a href="#dadd" class="indent4 normal white code">dadd</a></p>
+		<p class="indent1"><a href="#sub" class="indent4 normal white code">sub</a></p>
+		<p class="indent1"><a href="#subc" class="indent4 normal white code">subc</a></p>
+		<p class="indent1"><a href="#and" class="indent4 normal white code">and</a></p>
+		<p class="indent1"><a href="#bit" class="indent4 normal white code">bit</a></p>
+		<p class="indent1"><a href="#xor" class="indent4 normal white code">xor</a></p>
+		<p class="indent1"><a href="#cmp" class="indent4 normal white code">cmp</a></p>
+		<p class="indent1"><a href="#rra" class="indent4 normal white code">rra</a></p>
+		<p class="indent1"><a href="#rrc" class="indent4 normal white code">rrc</a></p>
+		<p class="indent1"><a href="#sxt" class="indent4 normal white code">sxt</a></p>
+		<p class="indent1"><a href="#reti" class="indent4 normal white code">reti</a></p>
+		<p class="indent1"><a href="#adc" class="indent4 normal white code">adc</a></p>
+		<p class="indent1"><a href="#dadc" class="indent4 normal white code">dadc</a></p>
+		<p class="indent1"><a href="#dec" class="indent4 normal white code">dec</a></p>
+		<p class="indent1"><a href="#decd" class="indent4 normal white code">decd</a></p>
+		<p class="indent1"><a href="#inc" class="indent4 normal white code">inc</a></p>
+		<p class="indent1"><a href="#incd" class="indent4 normal white code">incd</a></p>
+		<p class="indent1"><a href="#sbc" class="indent4 normal white code">sbc</a></p>
+		<p class="indent1"><a href="#inv" class="indent4 normal white code">inv</a></p>
+		<p class="indent1"><a href="#rla" class="indent4 normal white code">rla</a></p>
+		<p class="indent1"><a href="#rlc" class="indent4 normal white code">rlc</a></p>
+		<p class="indent1"><a href="#clrn" class="indent4 normal white code">clrn</a> (always sets <span class="white code">N</span> to 0)</p>
+		<p class="indent1"><a href="#setn" class="indent4 normal white code">setn</a> (always sets <span class="white code">N</span> to 1)</p>
+		<p class="indent1"><a href="#tst" class="indent4 normal white code">tst</a></p>
+		</details>
+		<hr>
+<!-- Z / Zero Bit -->
+		<h3 class="indent2" id="sr_z">Z / Zero Bit</h3>
+		<p class="indent3">The <span class="white code">Z</span> register is a system register that is set to one when the value of the previous operation results in zero, or is set to zero when the result is not zero.</p>
+		<p class="indent3">The following <a href="#opcodes">opcodes</a> are able to alter <span class="white code">Z</span>:</p>
+		<details class="indent2">
+		<summary>Click to show list</summary>
+		<p class="indent1"><a href="#add" class="indent4 normal white code">add</a></p>
+		<p class="indent1"><a href="#addc" class="indent4 normal white code">addc</a></p>
+		<p class="indent1"><a href="#dadd" class="indent4 normal white code">dadd</a></p>
+		<p class="indent1"><a href="#sub" class="indent4 normal white code">sub</a></p>
+		<p class="indent1"><a href="#subc" class="indent4 normal white code">subc</a></p>
+		<p class="indent1"><a href="#and" class="indent4 normal white code">and</a></p>
+		<p class="indent1"><a href="#bit" class="indent4 normal white code">bit</a></p>
+		<p class="indent1"><a href="#xor" class="indent4 normal white code">xor</a></p>
+		<p class="indent1"><a href="#cmp" class="indent4 normal white code">cmp</a></p>
+		<p class="indent1"><a href="#rra" class="indent4 normal white code">rra</a></p>
+		<p class="indent1"><a href="#rrc" class="indent4 normal white code">rrc</a></p>
+		<p class="indent1"><a href="#sxt" class="indent4 normal white code">sxt</a></p>
+		<p class="indent1"><a href="#reti" class="indent4 normal white code">reti</a></p>
+		<p class="indent1"><a href="#adc" class="indent4 normal white code">adc</a></p>
+		<p class="indent1"><a href="#dadc" class="indent4 normal white code">dadc</a></p>
+		<p class="indent1"><a href="#dec" class="indent4 normal white code">dec</a></p>
+		<p class="indent1"><a href="#decd" class="indent4 normal white code">decd</a></p>
+		<p class="indent1"><a href="#inc" class="indent4 normal white code">inc</a></p>
+		<p class="indent1"><a href="#incd" class="indent4 normal white code">incd</a></p>
+		<p class="indent1"><a href="#sbc" class="indent4 normal white code">sbc</a></p>
+		<p class="indent1"><a href="#inv" class="indent4 normal white code">inv</a></p>
+		<p class="indent1"><a href="#rla" class="indent4 normal white code">rla</a></p>
+		<p class="indent1"><a href="#rlc" class="indent4 normal white code">rlc</a></p>
+		<p class="indent1"><a href="#clrz" class="indent4 normal white code">clrz</a> (always sets <span class="white code">Z</span> to 0)</p>
+		<p class="indent1"><a href="#setz" class="indent4 normal white code">setz</a> (always sets <span class="white code">Z</span> to 1)</p>
+		<p class="indent1"><a href="#tst" class="indent4 normal white code">tst</a></p>
+		</details>
 		<hr>
 <!-- C / Carry Bit -->
 		<h3 class="indent2" id="sr_c">C / Carry Bit</h3>
 		<p class="indent3">The <span class="white code">C</span> register is a system register that is set to one when the value of the previous operation results in a carry, or is set to zero when the result does not produce a carry.</p>
 		<p class="indent3">The following <a href="#opcodes">opcodes</a> are able to alter <span class="white code">C</span>:</p>
+		<details class="indent2">
+		<summary>Click to show list</summary>
+		<p class="indent1"><a href="#add" class="indent4 normal white code">add</a></p>
+		<p class="indent1"><a href="#addc" class="indent4 normal white code">addc</a></p>
+		<p class="indent1"><a href="#dadd" class="indent4 normal white code">dadd</a></p>
+		<p class="indent1"><a href="#sub" class="indent4 normal white code">sub</a></p>
+		<p class="indent1"><a href="#subc" class="indent4 normal white code">subc</a></p>
+		<p class="indent1"><a href="#and" class="indent4 normal white code">and</a></p>
+		<p class="indent1"><a href="#bit" class="indent4 normal white code">bit</a></p>
+		<p class="indent1"><a href="#xor" class="indent4 normal white code">xor</a></p>
+		<p class="indent1"><a href="#cmp" class="indent4 normal white code">cmp</a></p>
+		<p class="indent1"><a href="#rra" class="indent4 normal white code">rra</a></p>
+		<p class="indent1"><a href="#rrc" class="indent4 normal white code">rrc</a></p>
+		<p class="indent1"><a href="#sxt" class="indent4 normal white code">sxt</a></p>
+		<p class="indent1"><a href="#reti" class="indent4 normal white code">reti</a></p>
+		<p class="indent1"><a href="#adc" class="indent4 normal white code">adc</a></p>
+		<p class="indent1"><a href="#dadc" class="indent4 normal white code">dadc</a></p>
+		<p class="indent1"><a href="#dec" class="indent4 normal white code">dec</a></p>
+		<p class="indent1"><a href="#decd" class="indent4 normal white code">decd</a></p>
+		<p class="indent1"><a href="#inc" class="indent4 normal white code">inc</a></p>
+		<p class="indent1"><a href="#incd" class="indent4 normal white code">incd</a></p>
+		<p class="indent1"><a href="#sbc" class="indent4 normal white code">sbc</a></p>
+		<p class="indent1"><a href="#inv" class="indent4 normal white code">inv</a></p>
+		<p class="indent1"><a href="#rla" class="indent4 normal white code">rla</a></p>
+		<p class="indent1"><a href="#rlc" class="indent4 normal white code">rlc</a></p>
+		<p class="indent1"><a href="#clrc" class="indent4 normal white code">clrc</a> (always sets <span class="white code">C</span> to 0)</p>
+		<p class="indent1"><a href="#setc" class="indent4 normal white code">setc</a> (always sets <span class="white code">C</span> to 1)</p>
+		<p class="indent1"><a href="#tst" class="indent4 normal white code">tst</a> (always sets <span class="white code">C</span> to 1)</p>
+		</details>
 		<hr>
 	</body>
 </html>
