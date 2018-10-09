@@ -15,6 +15,10 @@
 	{
 		margin-left: 4em;
 	}
+	.indent5
+	{
+		margin-left: 5em;
+	}
 	.bold
 	{
 		font-weight: bold;
@@ -64,6 +68,8 @@
 		<hr>
 <!-- Contents -->
 		<h2 class="indent1">Contents</h2>
+		<a class="indent2" href="#syntax">Syntax</a>
+		<br>
 		<a class="indent2" href="#opcodes">Opcodes</a>
 		<br>
 		<a class="indent3" href="#add">add</a>
@@ -108,6 +114,36 @@
 		<br>
 		<a class="indent3" href="#sr_c">C / Carry Bit</a>
 		<hr>
+<!-- Syntax -->
+		<h2 class="indent1" id="syntax">Syntax</h2>
+		<p class="indent3">In order for your code to successfully assemble, your syntax must be correct. Syntax basics and tips can be found in this section.</p>
+		<p class="indent3">Basic syntax is as follows:</p>
+		<table class="code indent4">
+			<tr>
+				<td class="red">01</td>
+				<td class="white">Label</td>
+				<td class="white">&nbsp;<a class="white" href="#opcodes">Opcode</a> Operand,Operand</td>
+				<td class="comment">&nbsp;;Comment</td>
+			</tr>
+			<tr>
+				<td class="red">02</td>
+				<td class="white"></td>
+				<td class="white">&nbsp;<a class="white" href="#opcodes">Opcode</a> Operand</td>
+				<td class="comment">&nbsp;;Comment</td>
+			</tr>
+		</table>
+		<p class="indent3">At the far left, the line number can be seen. This is not typed by the user, but rather, is included for readability.</p>
+		<p class="indent3">On line <span class="red code">01</span>, the first thing that can be seen is <span class="white code">Label</span>. This is similar to a function in other programming languages, with an important key difference: Only the beginning of a label is declared, but no specific end point is defined. The purpose of a label is to give jump <a href="#opcodes">opcodes</a> a location to jump to. If no jump is called before the label is declared, the code will continue running into the label as regular code, effectively ignoring the label.</p>
+		<p class="indent3">Next on line <span class="red code">01</span>, <span class="white code">&nbsp;<a class="white" href="#opcodes">Opcode</a> Operand,Operand</span> can be seen. An <a href="#opcodes">opcode</a> is similar to any basic operation in other languages, such as <span class="white code">x + y</span>. A list of <a href="#opcodes">opcodes</a> with explantions and examples can be found in the next section. <span class="white code">Operands</span> are basically the values that are passed to the operation, such as <span class="white code">x</span> and <span class="white code">y</span>.</p>
+		<p class="indent3">Finally, <span class="comment code">&nbsp;;Comment</span> can be seen at the end of line <span class="red code">01</span>. This is simply a comment that is used to help people understand what a particular line or section of code is doing.</p>
+		<p class="indent3">In line <span class="red code">02</span>, there are a few things different. First, there is no label present. Labels are not necessary in a program unless jumps are going to be used, but it is important to add whitespace before the opcode is called, or the assembler will think you are trying to declare a label instead.</p>
+		<p class="indent3">Another important thing to note is that when hexadecimal values starting with a letter are passed to an <a href="#opcodes">opcode</a>, and extra zero must be added to the beginning, or else the assembler will think you are trying to pass a label to it instead.</p>
+		<p class="indent3">For example:</p>
+		<p class="indent4">Incorrect:</p>
+		<table class="indent5 code"><tr><td class="red">01</td><td class="white">&nbsp;<a href="#mov" class="white">mov</a> #FFFFh,&0200h</td></tr></table>
+		<p class="indent4">Correct:</p>
+		<table class="indent5 code"><tr><td class="red">01</td><td class="white">&nbsp;<a href="#mov" class="white">mov</a> #0FFFFh,&0200h</td></tr></table>
+		<hr>
 <!-- Opcodes -->
 		<h2 class="indent1" id="opcodes">Opcodes</h2>
 		<p class="indent3">Opcodes are the simplest instructions that can be given to a processor. Opcodes are binary instructions that are sent to a processor to tell it what instruction to perform on some number of inputs. Since binary and hexacecimal instructions are not optimal for human understanding, assembly languages represent these values as mnemonics such as <span class="code white"><a href="#add" class="normal white">add</a></span>, <span class="code white"><a href="#jmp" class="normal white">jmp</a></span>, <span class="white code"><a href="#mov" class="normal white">mov</a></span>, and many others.</p>
@@ -117,7 +153,7 @@
 		<hr>
 <!-- ADD -->
 		<h3 class="indent2" id="add">add(.w/.b)</h3>
-		<p class="indent3"><span class="code white">add x,y</span> will add together the values of <span class="code white">x</span> and <span class="code white">y</span>, and then store the result in <span class="code white">y</span>. Here is an example:</p>
+		<p class="indent3"><span class="code white">add x,y</span> is a double-operand <a href="#opcodes">opcode</a> that adds together the values of <span class="code white">x</span> and <span class="code white">y</span>, and then stores the result in <span class="code white">y</span>. Here is an example:</p>
 		<table class="indent4 code">
 			<tr>
 				<td class="red">01</td>
@@ -138,7 +174,7 @@
 		<hr>
 <!-- ADDC -->
 		<h3 class="indent2" id="addc">addc(.w/.b)</h3>
-		<p class="indent3"><span class="code white">addc x,y</span> will add together the values of <span class="code white">x</span>, <span class="white code">y</span>, and the <span><a class="normal white code" href="#sr_c">C</a></span> <a href="#sr" class="normal">register</a>, and then store the result in <span class="code white">y</span>. Here is an example:</p>
+		<p class="indent3"><span class="code white">addc x,y</span> is a double-operand <a href="#opcodes">opcode</a> that adds together the values of <span class="code white">x</span>, <span class="white code">y</span>, and the <span><a class="normal white code" href="#sr_c">C</a></span> <a href="#sr" class="normal">register</a>, and then stores the result in <span class="code white">y</span>. Here is an example:</p>
 		<table class="indent4 code">
 			<tr>
 				<td class="red">01</td>
@@ -164,7 +200,7 @@
 		<hr>
 <!-- DADD -->
 		<h3 class="indent2" id="dadd">dadd(.w/.b)</h3>
-		<p class="indent3"><span class="white code">dadd x,y</span> will add together the values of <span class="code white">x</span> and <span class="white code">y</span>, while treating <span class="code white">x</span> and <span class="white code">y</span> as decimal numbers instead of hexadecimal numbers. Here is an example:</p>
+		<p class="indent3"><span class="white code">dadd x,y</span> is a double-operand <a href="#opcodes">opcode</a> that adds together the values of <span class="code white">x</span> and <span class="white code">y</span> while treating them as decimal numbers instead of hexadecimal numbers, and then stores the result in <span class="white code">y</span>. Here is an example:</p>
 		<table class="indent4 code">
 			<tr>
 				<td class="red">01</td>
@@ -185,6 +221,24 @@
 		<hr>
 <!-- SUB -->
 		<h3 class="indent2" id="sub">sub(.w/.b)</h3>
+		<p class="indent3"><span class="white code">sub x,y</span> is a double-operand <a href="#opcodes">opcode</a> that subtracts the value of <span class="white code">x</span> from <span class="white code">y</span>, and then stores the value in <span class="white code">y</span>. Here is an example:</p>
+		<table class="indent4 code">
+			<tr>
+				<td class="red">01</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> #0002h,&0200h</td>
+				<td class="comment">&nbsp;;the value 0002h is copied into memory location 0x0200</td>
+			</tr>
+			<tr>
+				<td class="red">02</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> #000Ch,&0202h</td>
+				<td class="comment">&nbsp;;the value 000Ch is copied into memory location 0x0202</td>
+			</tr>
+			<tr>
+				<td class="red">03</td>
+				<td class="white">&nbsp;sub &0200h,&0202h</td>
+				<td class="comment">&nbsp;;the value stored in 0x0200 (0002h) is subtracted from the value in 0x0202 (000Ch) and the result (000Ah) is stored in 0x0202 </td>
+			</tr>
+		</table>
 		<hr>
 <!-- SUBC -->
 		<h3 class="indent2" id="subc">subc(.w/.b)</h3>
