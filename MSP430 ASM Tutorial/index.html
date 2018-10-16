@@ -52,11 +52,6 @@
 	{
 		white-space: nowrap;
 	}
-	.normal
-	{
-		font-weight: normal;
-/*		text-decoration: none; */
-	}
 </style>
 <html>
 	<head>
@@ -100,6 +95,22 @@
 		<br>
 		<a class="indent3" href="#mov">mov</a>
 		<br>
+		<a class="indent2" href="#addr_modes">Addressing Modes</a>
+		<br>
+		<a class="indent3" href="#addr_mode1">Immediate</a>
+		<br>
+		<a class="indent3" href="#addr_mode2">Register</a>
+		<br>
+		<a class="indent3" href="#addr_mode3">Absolute</a>
+		<br>
+		<a class="indent3" href="#addr_mode4">Symbolic</a>
+		<br>
+		<a class="indent3" href="#addr_mode5">Indexed</a>
+		<br>
+		<a class="indent3" href="#addr_mode6">Indirect Register</a>
+		<br>
+		<a class="indent3" href="#addr_mode7">Indirect Autoincrement</a>
+		<br>
 		<a class="indent2" href="#sr">Core Registers</a>
 		<br>
 		<a class="indent3" href="#sr_pc">PC / Program Counter</a>
@@ -113,6 +124,8 @@
 		<a class="indent3" href="#sr_z">Z / Zero Bit</a>
 		<br>
 		<a class="indent3" href="#sr_c">C / Carry Bit</a>
+		<br>
+		<a class="indent3" href="#sr_rn">R# / Registers</a>
 		<hr>
 <!-- Syntax -->
 		<h2 class="indent1" id="syntax">Syntax</h2>
@@ -136,7 +149,7 @@
 		<p class="indent3">On line <span class="red code">01</span>, the first thing that can be seen is <span class="white code">Label</span>. This is similar to a function in other programming languages, with an important key difference: Only the beginning of a label is declared, but no specific end point is defined. The purpose of a label is to give jump <a href="#opcodes">opcodes</a> a location to jump to. If no jump is called before the label is declared, the code will continue running into the label as regular code, effectively ignoring the label.</p>
 		<p class="indent3">Next on line <span class="red code">01</span>, <span class="white code">&nbsp;<a class="white" href="#opcodes">Opcode</a> Operand,Operand</span> can be seen. An <a href="#opcodes">opcode</a> is similar to any basic operation in other languages, such as <span class="white code">x + y</span>. A list of <a href="#opcodes">opcodes</a> with explantions and examples can be found in the next section. <span class="white code">Operands</span> are basically the values that are passed to the operation, such as <span class="white code">x</span> and <span class="white code">y</span>.</p>
 		<p class="indent3">Finally, <span class="comment code">&nbsp;;Comment</span> can be seen at the end of line <span class="red code">01</span>. This is simply a comment that is used to help people understand what a particular line or section of code is doing.</p>
-		<p class="indent3">In line <span class="red code">02</span>, there are a few things different. First, there is no label present. Labels are not necessary in a program unless jumps are going to be used, but it is important to add whitespace before the opcode is called, or the assembler will think you are trying to declare a label instead.</p>
+		<p class="indent3">In line <span class="red code">02</span>, there are a few things different. First, there is no label present. Labels are not necessary in a program unless jumps are going to be used, but it is important to add whitespace before the <a href="#opcodes">opcode</a> is called, or the assembler will think you are trying to declare a label instead.</p>
 		<p class="indent3">Another important thing to note is that when hexadecimal values starting with a letter are passed to an <a href="#opcodes">opcode</a>, and extra zero must be added to the beginning, or else the assembler will think you are trying to pass a label to it instead.</p>
 		<p class="indent3">For example:</p>
 		<p class="indent4">Incorrect:</p>
@@ -149,10 +162,11 @@
 		<p class="indent3">Opcodes are the simplest instructions that can be given to a processor. Opcodes are binary instructions that are sent to a processor to tell it what instruction to perform on some number of inputs. Since binary and hexacecimal instructions are not optimal for human understanding, assembly languages represent these values as mnemonics such as <span class="code white"><a href="#add" class="normal white">add</a></span>, <span class="code white"><a href="#jmp" class="normal white">jmp</a></span>, <span class="white code"><a href="#mov" class="normal white">mov</a></span>, and many others.</p>
 		<p class="indent3">There are three types of opcodes: Double-Operand, Single-Operand, and Jumps. Double-Operand opcodes take two arguments and perform some sort of action between the two. Single-Operand opcodes only take one argument and perform some sort of basic action on it. Jump opcodes move the processor to another section of the code by evaluating the <span class="code"><a href="#sr_v" class="normal white">V</a></span>, <span class="code"><a href="#sr_n" class="normal white">N</a></span>, <span class="code"><a href="#sr_z" class="normal white">Z</a></span>, and <span class="code"><a href="#sr_c" class="normal white">C</a></span> <a href="#sr">system registers</a></p>
 		<p class="indent3">In addition to this, there are also emulated opcodes. Emulated opcodes are not actually instructions for the processor, but rather, they are a simplification of another opcode for a specific purpose. When your code is compiled, the compiler automatically translates these emulated opcodes into real opcodes that the processor can understand.</p>
+		<p class="indent3">You will notice that there is a (.w/.b) after most of the names of the opcodes. This represents whether the opcode is treating the data passed to it as a word or as a byte. The word size for the MSP430 is 16 bits, while the byte size is 8 bits. Unless otherwise specified, an opcode will default to using word size. It should be noted that although the MSP430 is a 16-bit microprocessor, its memory locations are 8-bit. Because of this, only even numbered memory locations will be referenced in the examples on this page when an opcode is used in word mode. This allows two consecutive memory locations to be treated as a single 16-bit memory location.</p>
 		<p class="indent3">In total, there are 27 opcodes and 24 emulated opcodes for the MSP430. Each of these are explained in detail below.</p>
 		<hr>
 <!-- ADD -->
-		<h3 class="indent2" id="add">add(.w/.b)</h3>
+		<h3 class="indent2" id="add">add(.w/.b): ADD</h3>
 		<p class="indent3"><span class="code white">add x,y</span> is a double-operand <a href="#opcodes">opcode</a> that adds together the values of <span class="code white">x</span> and <span class="code white">y</span>, and then stores the result in <span class="code white">y</span>. Here is an example:</p>
 		<table class="indent4 code">
 			<tr>
@@ -171,9 +185,24 @@
 				<td class="comment">&nbsp;;the value stored in 0x0200 (0007h) and the value stored in 0x0202 (0003h) are added together (000Ah) and stored in 0x0202</td>
 			</tr>
 		</table>
+		<p class="indent3">C equivalent:</p>
+		<table class="indent4 code">
+			<tr>
+				<td class="red">01</td>
+				<td class="white">y = x + y;</td>
+			</tr>
+			<tr>
+				<td class="red">02</td>
+				<td class="comment">//or</td>
+			</tr>
+			<tr>
+				<td class="red">03</td>
+				<td class="white">y += x;</td>
+			</tr>
+		</table>
 		<hr>
 <!-- ADDC -->
-		<h3 class="indent2" id="addc">addc(.w/.b)</h3>
+		<h3 class="indent2" id="addc">addc(.w/.b): ADD with Carry</h3>
 		<p class="indent3"><span class="code white">addc x,y</span> is a double-operand <a href="#opcodes">opcode</a> that adds together the values of <span class="code white">x</span>, <span class="white code">y</span>, and the <span><a class="normal white code" href="#sr_c">C</a></span> <a href="#sr" class="normal">register</a>, and then stores the result in <span class="code white">y</span>. Here is an example:</p>
 		<table class="indent4 code">
 			<tr>
@@ -199,7 +228,7 @@
 		</table>
 		<hr>
 <!-- DADD -->
-		<h3 class="indent2" id="dadd">dadd(.w/.b)</h3>
+		<h3 class="indent2" id="dadd">dadd(.w/.b): Decimal ADD</h3>
 		<p class="indent3"><span class="white code">dadd x,y</span> is a double-operand <a href="#opcodes">opcode</a> that adds together the values of <span class="code white">x</span> and <span class="white code">y</span> while treating them as decimal numbers instead of hexadecimal numbers, and then stores the result in <span class="white code">y</span>. Here is an example:</p>
 		<table class="indent4 code">
 			<tr>
@@ -220,7 +249,7 @@
 		</table>
 		<hr>
 <!-- SUB -->
-		<h3 class="indent2" id="sub">sub(.w/.b)</h3>
+		<h3 class="indent2" id="sub">sub(.w/.b): SUBtract</h3>
 		<p class="indent3"><span class="white code">sub x,y</span> is a double-operand <a href="#opcodes">opcode</a> that subtracts the value of <span class="white code">x</span> from <span class="white code">y</span>, and then stores the value in <span class="white code">y</span>. Here is an example:</p>
 		<table class="indent4 code">
 			<tr>
@@ -239,35 +268,189 @@
 				<td class="comment">&nbsp;;the value stored in 0x0200 (0002h) is subtracted from the value in 0x0202 (000Ch) and the result (000Ah) is stored in 0x0202 </td>
 			</tr>
 		</table>
+		<p class="indent3">C equivalent:</p>
+		<table class="indent4 code">
+			<tr>
+				<td class="red">01</td>
+				<td class="white">y = y - x;</td>
+			</tr>
+			<tr>
+				<td class="red">02</td>
+				<td class="comment">//or</td>
+			</tr>
+			<tr>
+				<td class="red">03</td>
+				<td class="white">y -= x;</td>
+			</tr>
+		</table>
 		<hr>
 <!-- SUBC -->
-		<h3 class="indent2" id="subc">subc(.w/.b)</h3>
+		<h3 class="indent2" id="subc">subc(.w/.b): SUBtract with Carry</h3>
 		<hr>
 <!-- AND -->
-		<h3 class="indent2" id="and">and(.w/.b)</h3>
+		<h3 class="indent2" id="and">and(.w/.b): AND</h3>
 		<hr>
 <!-- BIC -->
-		<h3 class="indent2" id="bic">bic(.w/.b)</h3>
+		<h3 class="indent2" id="bic">bic(.w/.b): BIt Compare</h3>
 		<hr>
 <!-- BIS -->
-		<h3 class="indent2" id="bis">bis(.w/.b)</h3>
+		<h3 class="indent2" id="bis">bis(.w/.b): BIt Set</h3>
 		<hr>
 <!-- BIT -->
-		<h3 class="indent2" id="bit">bit(.w/.b)</h3>
+		<h3 class="indent2" id="bit">bit(.w/.b): BIt Test</h3>
 		<hr>
 <!-- XOR -->
-		<h3 class="indent2" id="xor">xor(.w/.b)</h3>
+		<h3 class="indent2" id="xor">xor(.w/.b): XOR</h3>
 		<hr>
 <!-- CMP -->
-		<h3 class="indent2" id="cmp">cmp(.w/.b)</h3>
+		<h3 class="indent2" id="cmp">cmp(.w/.b): CoMPare</h3>
 		<hr>
 <!-- MOV -->
-		<h3 class="indent2" id="mov">mov(.w/.b)</h3>
+		<h3 class="indent2" id="mov">mov(.w/.b): MOVe</h3>
 		<hr>
 <!-- AAA -->
 		<h3 class="indent2" id="aaa">aaa(.w/.b)</h3>
 		<hr>
-<!-- Core Registers-->
+<!-- Addressing Modes -->
+		<h2 class="indent1" id="addr_modes">Addressing Modes</h2>
+		<p class="indent3">There are different ways that numbers, memory locations, and registers can be referenced in MSP430 Assembly. These methods are known as addressing modes. In total, there are 7 addressing modes available to use on the MSP430, and each of them are explained below.</p>
+		<hr>
+<!-- Immediate Mode -->
+		<h3 class="indent2" id="addr_mode1">Immediate</h3>
+		<p class="indent3">Immediate mode is used when passing constant values to a register or memory location. It is denoted by putting a '#' in front of the number. Here is an example:</p>
+		<table class="indent4 code">
+			<tr>
+				<td class="red">01</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> #0004h,&0200h</td>
+				<td class="comment">&nbsp;;The constant value of 0004h is denoted using a '#', and this value is copied to memory location 0x0200</td>
+			</tr>
+		</table>
+		<hr>
+<!-- Register Mode -->
+		<h3 class="indent2" id="addr_mode2">Register</h3>
+		<p class="indent3">Register mode is used when a <a href="#sr_rn">register</a> is referenced by an opcode. It is denoted by putting an 'R' in front of any number from 3 to 15. For example:</p>
+		<table class="indent4 code">
+			<tr>
+				<td class="red">01</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> #0004h,R4</td>
+				<td class="comment">&nbsp;;The value 0004h is copied to the R4 register.</td>
+			</tr>
+		</table>
+		<hr>
+<!-- Absolute Mode -->
+		<h3 class="indent2" id="addr_mode3">Absolute</h3>
+		<p class="indent3">Absolute mode is used when a specific memory location is being referenced. It is denoted by putting an '&' in front of the address of a specific memory location. For example:</p>
+		<table class="indent4 code">
+			<tr>
+				<td class="red">01</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> #0070h,&0204h</td>
+				<td class="comment">&nbsp;;The value 0070h is copied into memory location 0x0204</td>
+			</tr>
+		</table>
+		<hr>
+<!-- Symbolic Mode -->
+		<h3 class="indent2" id="addr_mode4">Symbolic</h3>
+		<p class="indent3">Symbolic mode is used when referencing a value defined in msp430.h. Some of these values are <span class="white code">P1OUT</span>, <span class="white code">P1REN</span>, and <span class="white code">PC</span>. For example:</p>
+		<table class="indent4 code">
+			<tr>
+				<td class="red">01</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> #BIT0,P1DIR</td>
+				<td class="comment">&nbsp;;The constant value defined by BIT0 (0001h) is copied into the memory location defined by P1DIR (0x0022). This enables the red LED to be used as an output</td>
+			</tr>
+			<tr>
+				<td class="red">02</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> #BIT0,P1OUT</td>
+				<td class="comment">&nbsp;;The constant value defined by BIT0 (0001h) is copied into the memory location defined by P1OUT (0x0021). This turns on the red LED</td>
+			</tr>
+		</table>
+		<hr>
+<!-- Indexed Mode -->
+		<h3 class="indent2" id="addr_mode5">Indexed</h3>
+		<p class="indent3">Indexed mode is used when you want to treat an address as an array. It is denoted by '#(x)' where # is the index of the element in the array and x is a register that stores the first memory location in the array. For example:</p>
+		<table class="indent4 code">
+			<tr>
+				<td class="red">01</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> #0200h,R4</td>
+				<td class="comment">&nbsp;;The value 0200h is copied into R4</td>
+			</tr>
+			<tr>
+				<td class="red">02</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> #0001h,0(R4)</td>
+				<td class="comment">&nbsp;;The value 0001h is copied into the memory location stored in R4 (0x0200) + 0 (0x0200)</td>
+			</tr>
+			<tr>
+				<td class="red">03</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> #0002h,2(R4)</td>
+				<td class="comment">&nbsp;;The value 0002h is copied into the memory location stored in R4 (0x0200) + 2 (0x0202)</td>
+			</tr>
+			<tr>
+				<td class="red">04</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> #0003h,12(R4)</td>
+				<td class="comment">&nbsp;;The value 0003h is copied into the memory location stored in R4 (0x0200) + 12 (0x020C)</td>
+			</tr>
+		</table>
+		<hr>
+<!-- Indirect Register Mode -->
+		<h3 class="indent2" id="addr_mode6">Indirect Register</h3>
+		<p class="indent3">Indirect register mode is used when a register is being used as a static memory location. It is denoted by an '@' before the register where a memory location is stored. It should be noted that you can not copy a value into an address referenced by indirect register mode, you can only copy a value out of it. For example:</p>
+		<table class="indent4 code">
+			<tr>
+				<td class="red">01</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> #0200h,R4</td>
+				<td class="comment">&nbsp;;The value 0200h is copied into R4</td>
+			</tr>
+			<tr>
+				<td class="red">02</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> #000Bh,&0200h</td>
+				<td class="comment">&nbsp;;The value 000Bh is copied into the memory location stored in R4 (0x0200)</td>
+			</tr>
+			<tr>
+				<td class="red">03</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> @R4,R5</td>
+				<td class="comment">&nbsp;;The value stored in the memory location stored in R4 (0x0200) (000Bh) is copied into R5</td>
+			</tr>
+		</table>
+		<hr>
+<!-- Indirect Autoincrement Mode -->
+		<h3 class="indent2" id="addr_mode7">Indirect Autoincrement</h3>
+		<p class="indent3">Indirect autoincrement mode is used when a register is being used to reference a series of memory locations. It is denoted by '@x+' where x is a register that stores a memory location. Indirect autoincrement mode is functionally identical to indirect register mode with one difference: the value of the register is incremented after its value is used. It should be noted that the value of the register  will be incremented twice if the <a>opcode</a> is in word mode, but only once if the <a>opcode</a> is in byte mode. For example:</p>
+		<table class="indent4 code">
+			<tr>
+				<td class="red">01</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> #0200h,R4</td>
+				<td class="comment">&nbsp;;The value 0200h is copied into R4</td>
+			</tr>
+			<tr>
+				<td class="red">02</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> #0007h,&0200h</td>
+				<td class="comment">&nbsp;;The value 0007h is copied into the memory location stored in R4 (0x0200)</td>
+			</tr>
+			<tr>
+				<td class="red">03</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> @R4+,R5</td>
+				<td class="comment">&nbsp;;The value stored in the memory location stored in R4 (0x0200) (0007h) is copied into R5, and the memory location stored in R4 is incremented by 2 (0x0202)</td>
+			</tr>
+		</table>
+		<br>
+		<table class="indent4 code">
+			<tr>
+				<td class="red">01</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a> #0200h,R4</td>
+				<td class="comment">&nbsp;;The value 0200h is copied into R4</td>
+			</tr>
+			<tr>
+				<td class="red">02</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a>.b #0004h,&0200h</td>
+				<td class="comment">&nbsp;;The value 0004h is copied into the memory location stored in R4 (0x0200)</td>
+			</tr>
+			<tr>
+				<td class="red">03</td>
+				<td class="white">&nbsp;<a class="white" href="#mov">mov</a>.b @R4+,R5</td>
+				<td class="comment">&nbsp;;The value stored in the memory location stored in R4 (0x0200) (0004h) is copied into R5, and the memory location stored in R4 is incremented by 1 (0x0201)</td>
+			</tr>
+		</table>
+		<hr>
+<!-- Core Registers -->
 		<h2 class="indent1" id="sr">Core Registers</h2>
 		<p class="indent3">Core registers are similar to memory locations, but they are stored in the CPU rather than the RAM. They can be read and written quicker due to their location, but they have to be called differently than a normal memory address. Some core registers can be edited and utilized just like a regular memory address, but some are automatically changed based on the result of previous operations. This type is called a system register, and they are important for jump <a href="#opcodes">opcodes</a> to work.</p>
 		<hr>
@@ -412,6 +595,10 @@
 		<p class="indent1"><a href="#setc" class="indent4 normal white code">setc</a> (always sets <span class="white code">C</span> to 1)</p>
 		<p class="indent1"><a href="#tst" class="indent4 normal white code">tst</a> (always sets <span class="white code">C</span> to 1)</p>
 		</details>
+		<hr>
+<!-- R# / Registers -->
+		<h3 class="indent2" id="sr_rn">R# / Registers</h3>
+		<p class="indent3">In addition to the previous core registers, there are also 13 registers that are available to use in your code. These are simply known as <span class="white code">R3</span> through <span class="white code">R15</span>. They are similar to memory locations, except that they are not referenced as an address, and they are able to be accesed by the processor more quickly due to them being physically inside the processor.</p>
 		<hr>
 	</body>
 </html>
