@@ -36,7 +36,7 @@
 	{
 		color: #F92659;
 	}
-	.white
+	.white , li
 	{
 		color: #F8F8F8;
 	}
@@ -51,6 +51,26 @@
 	td
 	{
 		white-space: nowrap;
+	}
+/*	ol
+	{
+		list-style: none;
+		counter-reset: item;
+	}*/
+	ol li
+	{
+		counter-increment: list;
+		list-style-type: none;
+		position: relative;
+	}
+	ol li::before
+	{
+		color: #F92659;
+		content: counter(list);
+		left:-32px;
+		position: absolute;
+		text-align: right;
+		width: 26px;
 	}
 </style>
 <html>
@@ -159,8 +179,8 @@
 		<hr>
 <!-- Opcodes -->
 		<h2 class="indent1" id="opcodes">Opcodes</h2>
-		<p class="indent3">Opcodes are the simplest instructions that can be given to a processor. Opcodes are binary instructions that are sent to a processor to tell it what instruction to perform on some number of inputs. Since binary and hexacecimal instructions are not optimal for human understanding, assembly languages represent these values as mnemonics such as <span class="code white"><a href="#add" class="normal white">add</a></span>, <span class="code white"><a href="#jmp" class="normal white">jmp</a></span>, <span class="white code"><a href="#mov" class="normal white">mov</a></span>, and many others.</p>
-		<p class="indent3">There are three types of opcodes: Double-Operand, Single-Operand, and Jumps. Double-Operand opcodes take two arguments and perform some sort of action between the two. Single-Operand opcodes only take one argument and perform some sort of basic action on it. Jump opcodes move the processor to another section of the code by evaluating the <span class="code"><a href="#sr_v" class="normal white">V</a></span>, <span class="code"><a href="#sr_n" class="normal white">N</a></span>, <span class="code"><a href="#sr_z" class="normal white">Z</a></span>, and <span class="code"><a href="#sr_c" class="normal white">C</a></span> <a href="#sr">system registers</a></p>
+		<p class="indent3">Opcodes are the simplest instructions that can be given to a processor. Opcodes are binary instructions that are sent to a processor to tell it what instruction to perform on some number of inputs. Since binary and hexacecimal instructions are not optimal for human understanding, assembly languages represent these values as mnemonics such as <span class="code white" style="height: 1em;"><a href="#add" class="white">add</a></span>, <span class="code white" style="height: 1em;"><a href="#jmp" class="white">jmp</a></span>, <span class="code white" style="height: 1em;"><a href="#mov" class="white">mov</a></span>, and many others.</p>
+		<p class="indent3">There are three types of opcodes: Double-Operand, Single-Operand, and Jumps. Double-Operand opcodes take two arguments and perform some sort of action between the two. Single-Operand opcodes only take one argument and perform some sort of basic action on it. Jump opcodes move the processor to another section of the code by evaluating the <span class="code white" style="height: 1em;"><a href="#sr_v" class="white">V</a></span>, <span class="code white" style="height: 1em;"><a href="#sr_n" class="white">N</a></span>, <span class="code white" style="height: 1em;"><a href="#sr_z" class="white">Z</a></span>, and <span class="code white" style="height: 1em;"><a href="#sr_c" class="white">C</a></span> <a href="#sr">system registers</a></p>
 		<p class="indent3">In addition to this, there are also emulated opcodes. Emulated opcodes are not actually instructions for the processor, but rather, they are a simplification of another opcode for a specific purpose. When your code is compiled, the compiler automatically translates these emulated opcodes into real opcodes that the processor can understand.</p>
 		<p class="indent3">You will notice that there is a (.w/.b) after most of the names of the opcodes. This represents whether the opcode is treating the data passed to it as a word or as a byte. The word size for the MSP430 is 16 bits, while the byte size is 8 bits. Unless otherwise specified, an opcode will default to using word size. It should be noted that although the MSP430 is a 16-bit microprocessor, its memory locations are 8-bit. Because of this, only even numbered memory locations will be referenced in the examples on this page when an opcode is used in word mode. This allows two consecutive memory locations to be treated as a single 16-bit memory location.</p>
 		<p class="indent3">In total, there are 27 opcodes and 24 emulated opcodes for the MSP430. Each of these are explained in detail below.</p>
@@ -600,5 +620,53 @@
 		<h3 class="indent2" id="sr_rn">R# / Registers</h3>
 		<p class="indent3">In addition to the previous core registers, there are also 13 registers that are available to use in your code. These are simply known as <span class="white code">R3</span> through <span class="white code">R15</span>. They are similar to memory locations, except that they are not referenced as an address, and they are able to be accesed by the processor more quickly due to them being physically inside the processor.</p>
 		<hr>
+<!-- Experimental MSP430G2553 Emulator UUDDLRLR -->
+		<script type="text/javascript" src="MSP430G2553.js"></script>
+		<span style="display: none;" class="emuText indent3">
+		
+		<span style="font-weight: bold; width: 60%; display: inline-block;">Code Editor</span>
+		<span style="font-weight: bold; width: 10%; display: inline-block; margin-left: 2.9em;">Register Viewer</span>
+		<span style="font-weight: bold; width: 20%; display: inline-block; margin-left: 1.1em;">Memory Viewer</span>
+		<br>
+		
+<!-- Code Editor -->
+		<ol class="code" style="display: inline-block; width: 60%; vertical-align: top; margin-top: 0;" contenteditable>
+			<li>&nbsp;</li>
+		</ol>
+		
+<!-- Register Viewer -->
+		<div class="white code" style="display: inline-block; width: 10%; vertical-align: top; margin-top: 0; padding-left: 1em;">
+			&nbsp;R3: 0x<span>0000</span>
+			<br>
+			&nbsp;R4: 0x<span>0000</span>
+			<br>
+			&nbsp;R5: 0x<span>0000</span>
+			<br>
+			&nbsp;R6: 0x<span>0000</span>
+			<br>
+			&nbsp;R7: 0x<span>0000</span>
+			<br>
+			&nbsp;R8: 0x<span>0000</span>
+			<br>
+			&nbsp;R9: 0x<span>0000</span>
+			<br>
+			R10: 0x<span>0000</span>
+			<br>
+			R11: 0x<span>0000</span>
+			<br>
+			R12: 0x<span>0000</span>
+			<br>
+			R13: 0x<span>0000</span>
+			<br>
+			R14: 0x<span>0000</span>
+			<br>
+			R15: 0x<span>0000</span>
+		</div>
+		
+<!-- Memory Viewer -->
+		<div class="white code" style="display: inline-block; width: 20%; vertical-align: top; margin-top: 0; padding-left: 1em;">
+			<span>0x0000 - 0x000F</span>
+		</div>
+		</span>
 	</body>
 </html>
