@@ -246,6 +246,21 @@
 				<td class="comment">&nbsp;;the value stored in 0x0200 (0004h), the value stored in 0x0202 (0005h), and the <a href="#sr_c" class="normal comment">C</a> <a href="sr" class="normal comment">register</a> (1) are added together (000Ah) and stored in 0x0202</td>
 			</tr>
 		</table>
+		<p class="indent3">C equivalent:</p>
+		<table class="indent4 code">
+			<tr>
+				<td class="red">01</td>
+				<td class="white">y = x + y + C;</td>
+			</tr>
+			<tr>
+				<td class="red">02</td>
+				<td class="comment">//or</td>
+			</tr>
+			<tr>
+				<td class="red">03</td>
+				<td class="white">y += (x + C);</td>
+			</tr>
+		</table>
 		<hr>
 <!-- DADD -->
 		<h3 class="indent2" id="dadd">dadd(.w/.b): Decimal ADD</h3>
@@ -476,11 +491,11 @@
 		<hr>
 <!-- PC / Program Counter -->
 		<h3 class="indent2" id="sr_pc">PC / Program Counter</h3>
-		<p class="indent3">The program counter is a register that is used by the processor to keep track of where it is in the code.</p>
+		<p class="indent3">The program counter is a register that is used by the processor to keep track of where it is in the code. It stores the memory location of the next line to be run.</p>
 		<hr>
 <!-- SP -->
 		<h3 class="indent2" id="sr_sp">SP / Stack Pointer</h3>
-		<p class="indent3">The stack pointer is a register that is used by the processor to keep track of where it is in the stack.</p>
+		<p class="indent3">The stack pointer is a register that is used by the processor to keep track of where it is in the stack. It stores the memory locations of previous lines of code where a jump occurred, so that the microcontroller will know where to jump back to when <a class="white code" href="#ret">ret</a> is called.</p>
 		<hr>
 <!-- V / Overflow Bit -->
 		<h3 class="indent2" id="sr_v">V / Overflow Bit</h3>
@@ -620,7 +635,7 @@
 		<h3 class="indent2" id="sr_rn">R# / Registers</h3>
 		<p class="indent3">In addition to the previous core registers, there are also 13 registers that are available to use in your code. These are simply known as <span class="white code">R3</span> through <span class="white code">R15</span>. They are similar to memory locations, except that they are not referenced as an address, and they are able to be accesed by the processor more quickly due to them being physically inside the processor.</p>
 		<hr>
-<!-- Experimental MSP430G2553 Emulator UUDDLRLR -->
+<!-- Experimental MSP430G2553 Interpreter UUDDLRLR -->
 		<script type="text/javascript" src="MSP430G2553.js"></script>
 		<span style="display: none;" class="emuText indent3">
 		
@@ -636,6 +651,18 @@
 		
 <!-- Register Viewer -->
 		<div class="white code" style="display: inline-block; width: 10%; vertical-align: top; margin-top: 0; padding-left: 1em;">
+			&nbsp;PC: 0x<span>0C00</span>
+			<br>
+			&nbsp;SP: 0x<span>0400</span>
+			<br>
+			&nbsp;&nbsp;V: <span>0</span>
+			<br>
+			&nbsp;&nbsp;N: <span>0</span>
+			<br>
+			&nbsp;&nbsp;Z: <span>0</span>
+			<br>
+			&nbsp;&nbsp;C: <span>0</span>
+			<br>
 			&nbsp;R3: 0x<span>0000</span>
 			<br>
 			&nbsp;R4: 0x<span>0000</span>
